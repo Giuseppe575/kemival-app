@@ -6,6 +6,7 @@ installer/node_modules/
 # Build output
 installer/dist/
 installer/out/
+installer/dist-store/
 
 # Backup files
 backup_*/
@@ -52,3 +53,7 @@ dash.png
 # chi accede a questo file puo' generare licenze MOVARISCH valide.
 # Mantenuto solo localmente per uso del titolare.
 license-generator.html
+
+# Strumenti locali
+.playwright-mcp/
+output/

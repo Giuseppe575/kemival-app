@@ -1,4 +1,4 @@
-# 🔧 BUGFIX: Calcolo SICUREZZA MOVARISCH
+# 🔧 BUGFIX: Calcolo SICUREZZA KEMIVAL
 **Data**: 24 Novembre 2025
 **Versione**: 1.1.0
 **Tipo**: Correzione critica + Implementazione M.I.R.C. (INRS)
@@ -430,7 +430,7 @@ Versione Claude: Sonnet 4.5
 ## 📚 RIFERIMENTI
 
 - `MIRC_Metodologia_Sicurezza.md` → Metodologia INRS completa
-- `ISTRUZIONI_CALCOLO.md` → Formule MOVARISCH salute
+- `ISTRUZIONI_CALCOLO.md` → Formule KEMIVAL salute
 - `app.js` linee 46-76 → Tabella H_PHYSICAL_SCORE
 - `src/lib/movarisch.js` linee 60-87 → Funzioni calcolo M.I.R.C.
 - Regolamento CLP/GHS → Classificazione H-codes

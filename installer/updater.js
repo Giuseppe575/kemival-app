@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - Sistema di Aggiornamenti Automatici
+ * KEMIVAL - Sistema di Aggiornamenti Automatici
  *
  * Gestisce il controllo e l'installazione degli aggiornamenti
  * utilizzando electron-updater con GitHub Releases.
@@ -69,6 +69,13 @@ const logError = (...values) => autoUpdater.logger?.error(...values);
  * @param {BrowserWindow} mainWindow - Finestra principale dell'app
  */
 function initUpdater(mainWindow) {
+  // Nei pacchetti Microsoft Store gli aggiornamenti sono gestiti dallo Store.
+  // Il percorso NSIS continua invece a usare electron-updater come prima.
+  if (process.windowsStore) {
+    console.log('Updater: pacchetto Microsoft Store - aggiornamenti gestiti dallo Store');
+    return;
+  }
+
   // Non controllare aggiornamenti in sviluppo
   if (!app.isPackaged) {
     console.log('Updater: Modalità sviluppo - aggiornamenti disabilitati');
@@ -91,7 +98,7 @@ function initUpdater(mainWindow) {
     dialog.showMessageBox(mainWindow, {
       type: 'info',
       title: 'Aggiornamento disponibile',
-      message: `È disponibile una nuova versione di MOVARISCH (v${info.version})`,
+      message: `È disponibile una nuova versione di KEMIVAL (v${info.version})`,
       detail: 'Vuoi scaricare e installare l\'aggiornamento?\n\nL\'applicazione si riavvierà automaticamente al termine.',
       buttons: ['Scarica ora', 'Più tardi'],
       defaultId: 0,
@@ -124,7 +131,7 @@ function initUpdater(mainWindow) {
     logError('Updater: errore', sanitizeUpdateError(err));
 
     if (mainWindow && !mainWindow.isDestroyed()) {
-      mainWindow.setTitle('MOVARISCH v' + app.getVersion());
+      mainWindow.setTitle('KEMIVAL v' + app.getVersion());
       mainWindow.webContents.send('update-status', { status: 'error' });
     }
 
@@ -155,7 +162,7 @@ function initUpdater(mainWindow) {
       });
 
       // Aggiorna la barra del titolo con il progresso
-      mainWindow.setTitle(`MOVARISCH - Scaricamento aggiornamento ${percent}%`);
+      mainWindow.setTitle(`KEMIVAL - Scaricamento aggiornamento ${percent}%`);
     }
   });
 
@@ -165,7 +172,7 @@ function initUpdater(mainWindow) {
 
     // Ripristina il titolo
     if (mainWindow && !mainWindow.isDestroyed()) {
-      mainWindow.setTitle('MOVARISCH v' + app.getVersion());
+      mainWindow.setTitle('KEMIVAL v' + app.getVersion());
 
       mainWindow.webContents.send('update-status', {
         status: 'downloaded',
@@ -204,6 +211,11 @@ function initUpdater(mainWindow) {
  * Controlla manualmente la presenza di aggiornamenti
  */
 function checkForUpdates() {
+  if (process.windowsStore) {
+    console.log('Updater: controllo delegato a Microsoft Store');
+    return Promise.resolve(null);
+  }
+
   if (!app.isPackaged) {
     console.log('Updater: Skip controllo in modalità sviluppo');
     return;
@@ -229,6 +241,16 @@ function checkForUpdates() {
  * (per uso da menu)
  */
 function checkForUpdatesManual(mainWindow) {
+  if (process.windowsStore) {
+    dialog.showMessageBox(mainWindow, {
+      type: 'info',
+      title: 'Aggiornamenti Microsoft Store',
+      message: 'Gli aggiornamenti di KEMIVAL sono gestiti automaticamente da Microsoft Store.',
+      buttons: ['OK']
+    });
+    return;
+  }
+
   if (!app.isPackaged) {
     dialog.showMessageBox(mainWindow, {
       type: 'info',
@@ -244,7 +266,7 @@ function checkForUpdatesManual(mainWindow) {
     dialog.showMessageBox(mainWindow, {
       type: 'info',
       title: 'Nessun aggiornamento',
-      message: 'Stai già utilizzando l\'ultima versione di MOVARISCH.',
+      message: 'Stai già utilizzando l\'ultima versione di KEMIVAL.',
       detail: `Versione attuale: ${app.getVersion()}`,
       buttons: ['OK']
     });

@@ -1,9 +1,9 @@
 @echo off
-REM Script per build MOVARISCH Windows
+REM Script per build KEMIVAL Windows
 REM Gestisce automaticamente il problema dei symbolic link
 
 echo ========================================
-echo  MOVARISCH - Build Installer Windows
+echo  KEMIVAL - Build Installer Windows
 echo ========================================
 echo.
 
@@ -61,7 +61,7 @@ if %errorLevel% == 0 (
     echo ========================================
     echo.
     echo Installer creato in:
-    echo %~dp0dist\MOVARISCH-Setup-1.1.0.exe
+    echo %~dp0dist\KEMIVAL-Setup-1.1.0.exe
     echo.
     pause
 ) else (

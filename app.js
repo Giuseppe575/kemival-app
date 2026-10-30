@@ -1851,18 +1851,18 @@ async function exportExcel(){
     });
     const ws = XLSX.utils.json_to_sheet(flatRows);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'MOVARISCH');
+    XLSX.utils.book_append_sheet(wb, ws, 'KEMIVAL');
     // Fallback robusto via Blob per ambienti con CSP restrittive
     const wbout = XLSX.write(wb, { bookType:'xlsx', type:'array' });
     const blob = new Blob([wbout], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    await downloadBlob(blob, 'MOVARISCH_autoestratto.xlsx');
+    await downloadBlob(blob, 'KEMIVAL_autoestratto.xlsx');
   } catch(err){
     console.error(err);
     if(flatRows?.length){
       try{
         const csv = rowsToCsv(flatRows);
         const csvBlob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
-        await downloadBlob(csvBlob, 'MOVARISCH_autoestratto.csv');
+        await downloadBlob(csvBlob, 'KEMIVAL_autoestratto.csv');
         const detail = describeError(err);
         showAlert(t('alerts.excelFallback', { error: detail }));
         return;
@@ -2300,7 +2300,7 @@ async function exportWord(){
 
     // Genera il file
     const blob = await docx.Packer.toBlob(doc);
-    await downloadBlob(blob, 'MOVARISCH_autoestratto.docx');
+    await downloadBlob(blob, 'KEMIVAL_autoestratto.docx');
 
   } catch(err){
     console.error(err);

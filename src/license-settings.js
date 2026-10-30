@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - Gestione UI Impostazioni Licenza
+ * KEMIVAL - Gestione UI Impostazioni Licenza
  * Popola e gestisce la sezione impostazioni licenza nell'interfaccia
  */
 

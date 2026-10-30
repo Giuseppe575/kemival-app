@@ -42,7 +42,8 @@ test('la verifica di contenimento non accetta prefissi di directory simili', () 
 test('consente soltanto destinazioni HTTPS esplicitamente approvate', () => {
   assert.equal(isAllowedExternalUrl('https://giuseppe575.github.io/movarisch/'), true);
   assert.equal(isAllowedExternalUrl('https://giuseppe575.github.io/movarisch/guida/'), true);
-  assert.equal(isAllowedExternalUrl('https://github.com/Giuseppe575/movarisch/issues'), true);
+  assert.equal(isAllowedExternalUrl('https://giuseppe575.github.io/kemival/acquista.html'), true);
+  assert.equal(isAllowedExternalUrl('https://github.com/Giuseppe575/kemival-app/issues'), true);
   assert.equal(isAllowedExternalUrl('https://www.garanteprivacy.it/'), true);
 
   assert.equal(isAllowedExternalUrl('http://giuseppe575.github.io/movarisch/'), false);
@@ -55,7 +56,7 @@ test('consente soltanto destinazioni HTTPS esplicitamente approvate', () => {
 
 test('mailto è limitato all’indirizzo ufficiale', () => {
   assert.equal(
-    isAllowedExternalUrl('mailto:atis.giuseppe@gmail.com?subject=MOVARISCH%20-%20Segnalazione'),
+    isAllowedExternalUrl('mailto:atis.giuseppe@gmail.com?subject=KEMIVAL%20-%20Segnalazione'),
     true
   );
   assert.equal(isAllowedExternalUrl('mailto:attacker@example.com'), false);

@@ -1,4 +1,4 @@
-# MOVARISCH - Progress e Stato del Progetto
+# KEMIVAL - Progress e Stato del Progetto
 
 **Ultimo aggiornamento:** 20 Maggio 2026
 
@@ -25,7 +25,7 @@
 
 **Coerenza Word ↔ Calcolo:**
 - Indici nel report Word ora stampati come "valore_numerico (descrizione_opzione)" — niente più ambiguità.
-- Appendice fissa "Guida agli indici MOVARISCH" (D/Q/U/C/T/I) con esempi laboratorio vs produzione + formula + riferimento normativo.
+- Appendice fissa "Guida agli indici MoVaRisCh" (D/Q/U/C/T/I) con esempi laboratorio vs produzione + formula + riferimento normativo.
 
 **Security hardening (Electron):**
 - CSP `<meta http-equiv="Content-Security-Policy">` in index.html.
@@ -44,9 +44,9 @@
 ## Stato Precedente: v1.2.0 ✅
 
 ### Repository
-- **GitHub Programma:** https://github.com/Giuseppe575/movarisch
-- **GitHub Releases:** https://github.com/Giuseppe575/movarisch/releases
-- **Sito Acquisto:** https://giuseppe575.github.io/movarisch-site/
+- **GitHub Programma:** https://github.com/Giuseppe575/kemival-app
+- **GitHub Releases:** https://github.com/Giuseppe575/kemival-app/releases
+- **Sito Acquisto:** https://giuseppe575.github.io/kemival/
 
 ### Release Pubblicate
 - **v1.1.0** - Release Ufficiale (29 Nov 2025)
@@ -74,7 +74,7 @@
 
 ### Electron Installer Windows
 - [x] Configurazione electron-builder
-- [x] Icona professionale MOVARISCH
+- [x] Icona professionale KEMIVAL
 - [x] Installer NSIS in italiano
 - [x] Script di build (`build-windows.bat`)
 
@@ -105,12 +105,12 @@ Modifica in **3 file**:
 ```
 
 **installer/main.js** (2 punti):
-- Titolo finestra: `title: 'MOVARISCH v1.3.0'`
-- Dialog info: `message: 'MOVARISCH v1.3.0'`
+- Titolo finestra: `title: 'KEMIVAL v1.3.0'`
+- Dialog info: `message: 'KEMIVAL v1.3.0'`
 
 **installer/preload.js** (2 punti):
 - `version: '1.3.0'`
-- `console.log('MOVARISCH v1.3.0 - Electron App')`
+- `console.log('KEMIVAL v1.3.0 - Electron App')`
 
 ### 2. Build dell'installer
 ```powershell
@@ -119,13 +119,13 @@ npm run build
 ```
 
 ### 3. Pubblica su GitHub Releases
-1. Vai su https://github.com/Giuseppe575/movarisch/releases/new
+1. Vai su https://github.com/Giuseppe575/kemival-app/releases/new
 2. Tag: `v1.3.0`
 3. Target: `main`
-4. Titolo: `MOVARISCH v1.3.0`
+4. Titolo: `KEMIVAL v1.3.0`
 5. Descrizione con novità
 6. Carica i file dalla cartella `installer/dist/`:
-   - `MOVARISCH-Setup-1.3.0.exe`
+   - `KEMIVAL-Setup-1.3.0.exe`
    - `latest.yml`
 7. Spunta "Set as the latest release"
 8. Pubblica
@@ -180,7 +180,7 @@ movarisch/
 
 ### Test
 Esegui con: `npm test`
-- 3 test per calcoli MOVARISCH
+- 3 test per calcoli KEMIVAL
 - Tutti passano ✓
 
 ---
@@ -199,7 +199,7 @@ Esegui con: `npm test`
 2. `9a2c5b3` - docs: Aggiunto PROGRESS.md
 3. `a044b41` - feat: Sistema aggiornamenti automatici con electron-updater
 4. `1441a43` - feat: Aggiunti strumenti di supporto per build Windows
-5. `b270832` - feat: Aggiunta icona MOVARISCH professionale
+5. `b270832` - feat: Aggiunta icona KEMIVAL professionale
 
 ---
 
@@ -299,7 +299,7 @@ Esegui con: `npm test`
 
 ### Installer locale di prova
 
-- File: `installer/dist/MOVARISCH-Setup-1.4.5.exe`
+- File: `installer/dist/KEMIVAL-Setup-1.4.5.exe`
 - Dimensione: 101.168.113 byte.
 - SHA-256: `6D62E1C671195C91E61C449C10E2F7BED0AA79124DCE2B6F52E7C9597393ECC0`
 - Firma digitale: assente, come concordato per questa fase.
@@ -327,7 +327,7 @@ Esegui con: `npm test`
 - Pull request `#26` approvata dai controlli CI e integrata in `main` il 3 agosto 2026.
 - Tag pubblico `v1.4.5` creato sul commit di rilascio.
 - Release GitHub pubblicata come release stabile, non bozza e non prerelease.
-- Pubblicati `MOVARISCH-Setup-1.4.5.exe`, `latest.yml` e `MOVARISCH-Setup-1.4.5.exe.blockmap`.
+- Pubblicati `KEMIVAL-Setup-1.4.5.exe`, `latest.yml` e `KEMIVAL-Setup-1.4.5.exe.blockmap`.
 - Verificato tramite API GitHub che `releases/latest` restituisce `v1.4.5` e che tutti gli asset risultano caricati.
 - Le installazioni dotate di updater possono rilevare la 1.4.5; download e installazione richiedono la conferma dell'utente. La 1.1.0 richiede invece l'installazione manuale.
 
@@ -351,3 +351,138 @@ Esegui con: `npm test`
 - Tag e release stabile `v1.4.6` pubblicati con installer, `latest.yml` e blockmap.
 - Verificato tramite API GitHub che `releases/latest` restituisce `v1.4.6` e che tutti gli asset risultano caricati con digest coerente.
 - Aggiornamento automatico attivo per le installazioni dotate di updater; download e installazione richiedono la conferma dell’utente.
+
+---
+
+## Diario di avanzamento — pubblicazione Microsoft Store (5–6 agosto 2026)
+
+### Strategia di distribuzione
+
+- Confermato che l’installer NSIS/GitHub esistente deve rimanere disponibile e invariato come percorso di distribuzione alternativo.
+- Aggiunto un percorso di build separato per Microsoft Store in formato APPX, senza sostituire o modificare l’installer tradizionale.
+- Verificato nuovamente l’installer esistente `installer/dist/KEMIVAL-Setup-1.4.6.exe`: SHA-256 `113044FB5BC56153698716ED14CAB482A1305BB27972F35BAB1C6986599547F0`, invariato durante il lavoro Store.
+- Per la versione Store gli aggiornamenti sono gestiti dal Microsoft Store; per la versione NSIS resta attivo `electron-updater` tramite GitHub Releases.
+
+### Implementazione del pacchetto Store
+
+- Aggiunta la configurazione separata `installer/electron-builder.store.cjs`.
+- Aggiunti gli script `installer/scripts/build-store.js` e `installer/scripts/generate-store-assets.js`.
+- Aggiunti gli asset APPX in `installer/build/appx/` e la guida `installer/README_MICROSOFT_STORE.md`.
+- Aggiunti i comandi `store:assets`, `build:store:test` e `build:store` in `installer/package.json`.
+- Aggiunto il test `installer/test/store-config.test.js` e ignorata la cartella di output `installer/dist-store/`.
+- `installer/updater.js` ora riconosce `process.windowsStore`: la build Store non usa l’updater GitHub, mentre la build NSIS conserva il comportamento precedente.
+- Pacchetto definitivo generato: `installer/dist-store/KEMIVAL-Store-1.4.6-x64.appx`, circa 144,4 MB.
+- Il pacchetto locale è intenzionalmente non firmato: Microsoft applicherà la propria firma dopo la certificazione.
+- Verifiche superate: 97/97 test applicazione, 5/5 test installer e release gate di configurazione.
+
+### Identità Microsoft Store
+
+- Nome riservato: `KEMIVAL`.
+- Store ID: `9PGRQHQ6GQKV`.
+- Package Identity Name: `Ilcodicedidante.KEMIVAL`.
+- Publisher: `CN=A86609EB-DF07-4138-9EFD-272E5709FBAD`.
+- Publisher display name: `Ilcodicedidante`.
+- Package Family Name: `Ilcodicedidante.KEMIVAL_6krz5prms6kkj`.
+- Submission 1: `1152921505701586815`.
+- Il pacchetto APPX è stato caricato, analizzato e accettato da Partner Center per Windows 10/11 Desktop, architettura x64, versione `1.4.6.0`.
+- La capability `runFullTrust`, necessaria per l’app desktop Electron, è stata dichiarata e motivata ai certificatori: esecuzione Win32, apertura dei PDF scelti dall’utente, generazione locale di file Excel/Word e salvataggio delle impostazioni, senza elevazione amministrativa, servizi o driver.
+
+### Prezzo, licenza e documentazione commerciale
+
+- Il download dal Microsoft Store è configurato come gratuito in tutti i mercati.
+- L’uso completo richiede la licenza perpetua KEMIVAL per 1 PC, prezzo `€105` comprensivo di oneri fiscali.
+- L’acquisto rimane esterno al Microsoft Store e viene gestito tramite PayPal sulla pagina ufficiale: `https://giuseppe575.github.io/kemival/acquista.html`.
+- Dichiarato in Partner Center che il prodotto consente acquisti senza utilizzare il sistema commerciale Microsoft Store.
+- Nelle schede Store italiana e inglese è stato chiarito che, entro 24 ore dall’acquisto, il cliente riceve via email:
+  - chiave di licenza nel formato `MOVA-XXXX-XXXX-XXXX-XXXX`;
+  - guida rapida di attivazione;
+  - fattura elettronica;
+  - collegamento all’ultima versione.
+- Aggiornati `src/license-activation.js`, `docs/acquista.html`, `docs/index.html`, `docs/termini.html` e `docs/eula.html` per rendere coerenti prezzo, oneri fiscali, consegna e link ufficiale.
+- Aggiunto `__tests__/store-license.test.js` per impedire la ricomparsa del vecchio prezzo di €100, delle diciture IVA obsolete e del dominio segnaposto.
+- Privacy Policy Store collegata a `https://giuseppe575.github.io/kemival/privacy.html`.
+
+### Scheda Store e certificazione
+
+- Categoria: `Business` → `Data + analytics`.
+- Classificazione IARC completata: 3+ / adatto a tutti, con indicazione di acquisti nell’app dovuta alla licenza digitale esterna.
+- Completate le schede Store in italiano e inglese con descrizione, funzionalità, prezzo della licenza, avvertenza professionale e due screenshot reali dell’app per lingua.
+- Inserite in Partner Center istruzioni riservate per i certificatori e una licenza di prova dedicata; il valore della chiave non è riportato in questo diario.
+- Configurata la pubblicazione automatica appena la submission supera la certificazione.
+- Submission inviata definitivamente a Microsoft il 5 agosto 2026.
+
+### Stato verificato il 6 agosto 2026
+
+- Stato generale: **In certification**.
+- Avanzamento: **fase 3 di 4 — Certification**.
+- Submission: completata.
+- Pre-processing: completato.
+- Certification: in corso.
+- Publishing: non ancora iniziato.
+- Nessun errore, rifiuto o richiesta di intervento presente in Partner Center.
+- Nessuna email ricevuta finora: situazione normale finché la certificazione non cambia stato; Microsoft indica alcune ore e, in certi casi, fino a 3 giorni lavorativi.
+- Prossima azione: controllare Partner Center e l’email; se la certificazione viene approvata, la pubblicazione partirà automaticamente.
+
+### Nota per future applicazioni PWA
+
+- Una PWA pubblicata nel Microsoft Store viene distribuita dallo Store su Windows.
+- La stessa PWA può essere installata direttamente dal browser su Android e iPhone/iPad, se responsive e dotata di HTTPS, manifest e service worker.
+- La presenza nel Google Play Store o nell’Apple App Store richiede invece pacchetti, account e revisioni separati; non deriva automaticamente dalla pubblicazione Microsoft.
+
+## Pubblicazione completata e documentazione tecnica — 6 agosto 2026
+
+- KEMIVAL versione `1.4.6` è stato certificato e pubblicato nel Microsoft Store.
+- Pagina pubblica: `https://apps.microsoft.com/detail/9PGRQHQ6GQKV`.
+- Data di rilascio mostrata dallo Store: 6 agosto 2026.
+- La pagina pubblica mostra correttamente l'editore `Ilcodicedidante`, ma il campo **Sviluppato da** riporta soltanto `Giuseppe`.
+- Il nome corretto da inserire nel prossimo aggiornamento della scheda Store è **Dott. Giuseppe Strifezza**; nelle informazioni dell'editore va inoltre indicata la **P. IVA 04107650659**.
+- Nei sorgenti sono stati corretti autore e copyright in `installer/package.json` e nella finestra Informazioni di `installer/main.js`; la modifica diventerà parte del prossimo pacchetto.
+- Creata la presentazione tecnica `docs/PRESENTAZIONE_TECNICA_KEMIVAL.md`, che descrive architettura Electron, pipeline SDS, calcolo, licenza, sicurezza, build NSIS e distribuzione APPX/MSIX tramite Microsoft Store.
+- Verifiche successive alla correzione: 97/97 test applicazione e 5/5 test installer superati.
+
+## Prima acquisizione internazionale e analisi lingue — 10 agosto 2026
+
+- Il valore `240` mostrato nella panoramica Partner Center indica i mercati di disponibilità, non il numero di download.
+- Nel report Acquisitions, intervallo ultimi 30 giorni, KEMIVAL registra:
+  - 4 visualizzazioni della pagina Store;
+  - 1 installazione completata;
+  - conversione pagina-installazione del 25%;
+  - tasso di successo installazione del 100%;
+  - mercato attribuito: Polonia, 1 installazione (100% delle installazioni registrate).
+- Il report Usage mostra 0 dispositivi attivi mensili e 0 sessioni. Le metriche di utilizzo sono indicate come `Opt-in`, quindi lo zero non dimostra con certezza che l'app non sia mai stata aperta; non è comunque presente un segnale di uso attivo rilevato.
+- L'installazione Store è gratuita e non equivale all'acquisto della licenza esterna da €105; è quindi coerente che non risulti alcun pagamento PayPal.
+- Il pacchetto e l'app dispongono già di italiano e inglese, ma il confronto dei file i18n rileva 249 voci italiane e 204 inglesi: mancano 45 traduzioni inglesi, soprattutto preset, avvertenze normative e parti tecniche dei report.
+- Strategia consigliata: completare e collaudare prima l'inglese nella stessa app e nello stesso pacchetto; non creare un secondo prodotto Store. Valutare una lingua polacca solo dopo ulteriori segnali di domanda.
+- Nota commerciale: tradurre l'interfaccia non rende automaticamente il metodo conforme alla normativa di altri Paesi. KEMIVAL applica un modello e riferimenti normativi italiani; all'estero deve essere presentato con chiarezza come strumento basato sul metodo italiano, salvo successivo adattamento normativo locale.
+
+## Correzione autore Store — bozza del 7 agosto 2026
+
+- Creata in Partner Center la **Submission 2**: `1152921505701602007`.
+- La submission modifica soltanto le schede Store; pacchetto APPX, prezzo, disponibilità, proprietà e classificazione restano invariati.
+- Scheda italiana aggiornata con:
+  - `Sviluppato da: Dott. Giuseppe Strifezza`;
+  - `© 2026 Dott. Giuseppe Strifezza — P. IVA 04107650659. KEMIVAL. Tutti i diritti riservati.`
+- Scheda inglese aggiornata con:
+  - `Developed by: Dott. Giuseppe Strifezza`;
+  - `© 2026 Dott. Giuseppe Strifezza — VAT No. IT04107650659. KEMIVAL. All rights reserved.`
+- Opzione di pubblicazione: automatica appena la submission supera la certificazione.
+- Stato: **bozza completa**, pulsante `Submit for certification` abilitato; invio definitivo in attesa della conferma del titolare.
+
+### Invio definitivo della correzione
+
+- Il titolare ha confermato l'invio definitivo il 7 agosto 2026.
+- La Submission 2 è stata inviata correttamente a Microsoft.
+- Stato immediatamente successivo all'invio: **Update in certification**, fase **2 di 4 — Pre-processing**.
+- Submission: completata; pre-processing: in corso; certification e publishing: non ancora iniziati.
+- Dopo il superamento della certificazione, Microsoft pubblicherà automaticamente il nuovo nome sviluppatore e la partita IVA.
+
+## Inglese completo e strategia commerciale Store — 10 agosto 2026
+
+- Completate le 45 traduzioni inglesi mancanti in `src/i18n/en.json`: italiano e inglese espongono ora 249 chiavi ciascuno.
+- Aggiunto `__tests__/i18n-parity.test.js`, che controlla automaticamente la parità delle chiavi e dei segnaposto dinamici tra le due lingue.
+- Nessuna modifica apportata alla logica di calcolo, al parser SDS, alla licenza o al pacchetto di installazione.
+- Verifica completa superata: 99/99 test applicazione.
+- Nel pannello Partner Center del prodotto non risulta esposta una funzione per creare campagne pubblicitarie Store a pagamento; sono presenti condivisione social, esperimenti della pagina e componenti aggiuntivi acquistabili.
+- Per misurare promozioni esterne si possono usare collegamenti Store con parametro `cid`, ad esempio `https://apps.microsoft.com/detail/9PGRQHQ6GQKV?cid=website`.
+- Microsoft Commerce può essere adottato creando un componente aggiuntivo durevole per la licenza completa, ma richiede integrazione tecnica dell'entitlement Store nell'app. La commissione Microsoft indicata per le app è il 15%.
+- Strategia consigliata: mantenere per ora PayPal e l'attuale licenza offline; usare campagne esterne tracciate; valutare successivamente Microsoft Commerce come secondo canale, conservando la compatibilità con le licenze già vendute.

@@ -1,7 +1,7 @@
-# MOVARISCH v1.1.0 - Release Notes
+# KEMIVAL v1.1.0 - Release Notes
 
 **Data rilascio:** 26 Novembre 2025
-**Repository:** [Giuseppe575/movarisch](https://github.com/Giuseppe575/movarisch)
+**Repository:** [Giuseppe575/kemival-app](https://github.com/Giuseppe575/kemival-app)
 
 ---
 
@@ -54,7 +54,7 @@ Questa release introduce correzioni critiche alla classificazione dei codici EUH
 #### Knowledge Base (support/knowledge-base.html)
 
 **Nuove sezioni aggiunte:**
-- **Cos'è MOVARISCH**: introduzione metodologia D.Lgs. 81/08
+- **Cos'è KEMIVAL**: introduzione metodologia D.Lgs. 81/08
 - **Codici H e classificazione**: H2xx (fisici), H3xx (salute), H4xx (ambiente)
 - **Metodologia M.I.R.C. (INRS)**: calcolo IRC = D × E con dettagli fattori
 - **Formule di calcolo**: esposizione inalatoria/cutanea, R_tot
@@ -64,7 +64,7 @@ Questa release introduce correzioni critiche alla classificazione dei codici EUH
 #### Documentazione Tecnica (support/documentazione.html)
 
 **Nuove sezioni aggiunte:**
-- **Metodologia MOVARISCH completa**: formule E_inal, E_cut, calcolo rischio
+- **Metodologia MoVaRisCh completa**: formule E_inal, E_cut, calcolo rischio
 - **Metodologia M.I.R.C. (INRS)**: IRC con fattori D (A1+A2) ed E (B1+B2+B3+B4)
 - **Codici H/EUH classificazione CLP**: tutti i range con esempi
 - **Calcoli MoVaRiSch parametri**: valori numerici per indici D, Q, U, C, T, I, d

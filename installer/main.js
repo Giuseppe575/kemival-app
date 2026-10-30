@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - Entry Point Electron
+ * KEMIVAL - Entry Point Electron
  *
  * Questo file gestisce:
  * - Creazione della finestra principale
@@ -12,6 +12,10 @@ const { app, BrowserWindow, Menu, dialog, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { initUpdater, checkForUpdatesManual } = require('./updater');
+
+// Dal rebranding KEMIVAL il productName è cambiato: la cartella dati resta quella
+// storica, altrimenti le installazioni esistenti perderebbero licenza e valutazioni.
+app.setPath('userData', path.join(app.getPath('appData'), 'MOVARISCH'));
 
 // Mantieni un riferimento globale alla finestra per evitare il garbage collection
 let mainWindow;
@@ -79,7 +83,7 @@ function createWindow() {
     height: 900,
     minWidth: 1024,
     minHeight: 768,
-    title: `MOVARISCH v${app.getVersion()}`,
+    title: `KEMIVAL v${app.getVersion()}`,
     icon: path.join(__dirname, 'build', 'icon.ico'),
     backgroundColor: '#0b1220',
     webPreferences: secureWebPreferences(),
@@ -179,13 +183,13 @@ function createMenu() {
         {
           label: 'Documentazione',
           click: () => {
-            openApprovedExternal('https://giuseppe575.github.io/movarisch/');
+            openApprovedExternal('https://giuseppe575.github.io/kemival/');
           }
         },
         {
           label: 'Segnala un problema',
           click: () => {
-            openApprovedExternal('mailto:atis.giuseppe@gmail.com?subject=MOVARISCH%20-%20Segnalazione');
+            openApprovedExternal('mailto:atis.giuseppe@gmail.com?subject=KEMIVAL%20-%20Segnalazione');
           }
         },
         { type: 'separator' },
@@ -194,7 +198,7 @@ function createMenu() {
           click: () => {
             const privacyPath = path.join(appPath, 'docs', 'privacy.html');
             if (fs.existsSync(privacyPath)) {
-              openInternalPage(path.join('docs', 'privacy.html'), 'Privacy Policy - MOVARISCH');
+              openInternalPage(path.join('docs', 'privacy.html'), 'Privacy Policy - KEMIVAL');
             }
           }
         },
@@ -203,7 +207,7 @@ function createMenu() {
           click: () => {
             const eulaPath = path.join(appPath, 'docs', 'eula.html');
             if (fs.existsSync(eulaPath)) {
-              openInternalPage(path.join('docs', 'eula.html'), 'EULA - MOVARISCH');
+              openInternalPage(path.join('docs', 'eula.html'), 'EULA - KEMIVAL');
             }
           }
         },
@@ -216,18 +220,20 @@ function createMenu() {
         },
         { type: 'separator' },
         {
-          label: 'Informazioni su MOVARISCH',
+          label: 'Informazioni su KEMIVAL',
           click: () => {
             dialog.showMessageBox(mainWindow, {
               type: 'info',
-              title: 'Informazioni su MOVARISCH',
-              message: `MOVARISCH v${app.getVersion()}`,
+              title: 'Informazioni su KEMIVAL',
+              message: `KEMIVAL v${app.getVersion()}`,
               detail:
-                'Software professionale per l\'analisi automatizzata del rischio chimico.\n\n' +
-                'Sviluppato da: Giuseppe\n' +
+                'Software professionale per l\'analisi automatizzata del rischio chimico\n' +
+                'secondo il modello pubblico MoVaRisCh (Regioni Emilia-Romagna, Lombardia, Toscana).\n\n' +
+                'Sviluppato da: Dott. Giuseppe Strifezza\n' +
+                'P. IVA: 04107650659\n' +
                 'Email: atis.giuseppe@gmail.com\n' +
-                'Sito: https://giuseppe575.github.io/movarisch-site/\n\n' +
-                '© 2025 Giuseppe - Tutti i diritti riservati',
+                'Sito: https://giuseppe575.github.io/kemival/\n\n' +
+                '© 2026 Dott. Giuseppe Strifezza - Tutti i diritti riservati',
               buttons: ['OK']
             });
           }

@@ -1,4 +1,4 @@
-# Politica di sicurezza di MOVARISCH
+# Politica di sicurezza di KEMIVAL
 
 ## Versioni supportate
 
@@ -14,4 +14,4 @@ La ricezione viene normalmente confermata entro 5 giorni lavorativi. Dopo la ver
 
 Le release destinate agli utenti devono essere firmate con Authenticode, includere `latest.yml` e superare il controllo automatico di versione, nome dell'artefatto, SHA-512 e firmatario. Le build locali non firmate sono ammesse esclusivamente per sviluppo e test e non devono essere distribuite.
 
-MOVARISCH non raccoglie telemetria d'uso tramite il sistema di aggiornamento. Il log locale dell'updater contiene solo data, stato tecnico e versione; URL e valori assimilabili a credenziali vengono rimossi.
+KEMIVAL non raccoglie telemetria d'uso tramite il sistema di aggiornamento. Il log locale dell'updater contiene solo data, stato tecnico e versione; URL e valori assimilabili a credenziali vengono rimossi.

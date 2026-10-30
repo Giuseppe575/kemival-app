@@ -34,7 +34,7 @@ test('la cumulativa espone frasi H con descrizione ed export Word modificabile',
   assert.match(source, /Frase H/);
   assert.match(source, /Descrizione/);
   assert.match(source, /id="exportCumulativeWordBtn"/);
-  assert.match(source, /MOVARISCH_scheda_cumulativa\.docx/);
+  assert.match(source, /KEMIVAL_scheda_cumulativa\.docx/);
   assert.match(source, /src\/lib\/docx\.umd\.js/);
   assert.match(source, /src\/data\/hazard-statements-it\.js/);
 });

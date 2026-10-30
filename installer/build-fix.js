@@ -25,7 +25,7 @@ const sevenZip = path.join(
   '7za.exe'
 );
 
-console.log('🔧 MOVARISCH Build Fix - Workaround Symbolic Link\n');
+console.log('🔧 KEMIVAL Build Fix - Workaround Symbolic Link\n');
 
 // Crea directory cache se non esiste
 if (!fs.existsSync(cacheDir)) {
@@ -79,7 +79,7 @@ try {
   console.log('\n' + '='.repeat(60));
   console.log('\n✅ BUILD COMPLETATO CON SUCCESSO!\n');
   console.log('📦 Installer creato in:');
-  console.log('   dist/MOVARISCH-Setup-1.1.0.exe\n');
+  console.log('   dist/KEMIVAL-Setup-1.1.0.exe\n');
 
 } catch (error) {
   console.log('\n' + '='.repeat(60));

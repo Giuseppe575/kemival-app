@@ -75,7 +75,7 @@ if (verifyArtifacts) {
   const latestPath = path.join(installerRoot, 'dist', 'latest.yml');
   if (!fs.existsSync(latestPath)) fail('dist/latest.yml assente');
   const metadata = parseLatestYml(fs.readFileSync(latestPath, 'utf8'));
-  const expectedName = `MOVARISCH-Setup-${packageJson.version}.exe`;
+  const expectedName = `KEMIVAL-Setup-${packageJson.version}.exe`;
   if (metadata.version !== packageJson.version) fail('versione latest.yml incoerente');
   if (metadata.path !== expectedName) fail(`path latest.yml inatteso: ${metadata.path}`);
   const installerPath = path.join(installerRoot, 'dist', expectedName);
@@ -84,4 +84,4 @@ if (verifyArtifacts) {
   if (verifySignature) assertValidAuthenticode(installerPath);
 }
 
-console.log(`Release gate superato per MOVARISCH ${packageJson.version}.`);
+console.log(`Release gate superato per KEMIVAL ${packageJson.version}.`);

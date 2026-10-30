@@ -177,7 +177,7 @@ return {
 | 24.1 | 33.5 | RISCHIO ELEVATO (Non basso) | RISCHIO ELEVATO | ✅ CONFORME |
 | 33.6 | ∞ | ❌ RISCHIO ELEVATO (sbagliato) | RISCHIO MOLTO ELEVATO | ⚠️ ESTESO (non in INRS originale) |
 
-### SALUTE (MOVARISCH)
+### SALUTE (KEMIVAL)
 
 | Rtot Min | Rtot Max | Giudizio PRIMA | Giudizio DOPO | Stato |
 |----------|----------|----------------|---------------|-------|
@@ -204,7 +204,7 @@ Valori testati:
 
 **Totale**: 18 test, **18 superati** ✅
 
-### Test SALUTE (MOVARISCH)
+### Test SALUTE (KEMIVAL)
 Valori testati:
 - Rtot = 0, 10, 14.9 → Irrilevante ✓
 - Rtot = 15, 18, 20.9 → Incertezza ✓

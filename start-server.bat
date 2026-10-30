@@ -1,6 +1,6 @@
 @echo off
 REM ====================================================================
-REM MOVARISCH - Script di avvio server locale
+REM KEMIVAL - Script di avvio server locale
 REM ====================================================================
 REM Questo script avvia un server HTTP locale sulla porta 8080
 REM per evitare problemi CORS con file:///
@@ -8,7 +8,7 @@ REM ====================================================================
 
 echo.
 echo ========================================
-echo   MOVARISCH - Server Locale
+echo   KEMIVAL - Server Locale
 echo ========================================
 echo.
 echo Avvio server HTTP sulla porta 8080...

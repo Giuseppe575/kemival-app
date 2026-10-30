@@ -5,8 +5,8 @@ const path = require('path');
 const { fileURLToPath } = require('url');
 
 const ALLOWED_HTTPS_TARGETS = Object.freeze([
-  { hostname: 'giuseppe575.github.io', pathPrefixes: ['/movarisch/', '/movarisch-site/'] },
-  { hostname: 'github.com', pathPrefixes: ['/Giuseppe575/movarisch'] },
+  { hostname: 'giuseppe575.github.io', pathPrefixes: ['/movarisch/', '/kemival/'] },
+  { hostname: 'github.com', pathPrefixes: ['/Giuseppe575/kemival-app'] },
   { hostname: 'www.garanteprivacy.it', pathPrefixes: ['/'] }
 ]);
 

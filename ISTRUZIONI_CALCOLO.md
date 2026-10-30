@@ -1,6 +1,6 @@
-# Istruzioni di calcolo MOVARISCH
+# Istruzioni di calcolo MoVaRisCh
 
-Questo documento raccoglie le formule di riferimento per il calcolo del rischio MOVARISCH implementato nell'applicazione web.
+Questo documento raccoglie le formule di riferimento per il calcolo del rischio KEMIVAL implementato nell'applicazione web.
 
 ## 1. Struttura generale
 

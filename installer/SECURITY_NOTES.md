@@ -1,4 +1,4 @@
-# MOVARISCH installer — Security notes
+# KEMIVAL installer — Security notes
 
 Note relative alla configurazione `package.json` di electron-builder.
 Tenute fuori dal `package.json` perche' electron-builder valida lo schema

@@ -1,8 +1,8 @@
-# 🔐 Sistema di Licenze Offline MOVARISCH
+# 🔐 Sistema di Licenze Offline KEMIVAL
 
 ## Panoramica
 
-Sistema completo di gestione licenze offline per MOVARISCH che non richiede connessione a server esterni. Ogni licenza viene validata tramite algoritmo crittografico con checksum.
+Sistema completo di gestione licenze offline per KEMIVAL che non richiede connessione a server esterni. Ogni licenza viene validata tramite algoritmo crittografico con checksum.
 
 ---
 
@@ -14,7 +14,7 @@ Sistema completo di gestione licenze offline per MOVARISCH che non richiede conn
   - Genera chiavi univoche nel formato `MOVA-XXXX-XXXX-XXXX-XXXX`
   - Salva tutte le chiavi generate in localStorage per tracciamento
   - Esporta le chiavi in formato JSON
-  - Interfaccia moderna con tema scuro coerente con MOVARISCH
+  - Interfaccia moderna con tema scuro coerente con KEMIVAL
 
 ### 2. **Validatore Offline** (`src/license-validator.js`)
 - Valida le licenze tramite algoritmo di checksum
@@ -25,7 +25,7 @@ Sistema completo di gestione licenze offline per MOVARISCH che non richiede conn
 - Modal a schermo intero che blocca l'accesso all'app
 - Auto-formattazione del campo input
 - Feedback visivo per errori e successo
-- Design coerente con MOVARISCH
+- Design coerente con KEMIVAL
 
 ### 4. **Gestione Licenza** (`src/license-settings.js`)
 - Visualizza lo stato della licenza attiva
@@ -62,7 +62,7 @@ Sistema completo di gestione licenze offline per MOVARISCH che non richiede conn
 ### Per il Cliente (Attivazione)
 
 1. **Primo Avvio:**
-   - All'apertura di MOVARISCH appare la schermata di attivazione
+   - All'apertura di KEMIVAL appare la schermata di attivazione
    - L'applicazione è bloccata fino all'inserimento di una licenza valida
 
 2. **Inserimento Licenza:**
@@ -264,7 +264,7 @@ La validazione è puramente matematica (checksum). Non serve server.
 
 1. Generare una chiave univoca
 2. Inviarla al cliente via email/ticket
-3. Il cliente la inserisce all'apertura di MOVARISCH
+3. Il cliente la inserisce all'apertura di KEMIVAL
 4. Segnare nel tuo sistema quale chiave è stata assegnata a quale cliente
 
 ---
@@ -289,7 +289,7 @@ In caso di problemi con il sistema di licenze:
 ✅ Gestione licenza nelle impostazioni
 ✅ Copia facile della propria chiave
 ✅ Licenze permanenti (no scadenza)
-✅ Design coerente con MOVARISCH
+✅ Design coerente con KEMIVAL
 ✅ Nessuna dipendenza da server esterni
 ✅ Export/Import delle chiavi generate
 
@@ -297,4 +297,4 @@ In caso di problemi con il sistema di licenze:
 
 **Versione Sistema:** 1.0
 **Compatibilità:** Tutti i browser moderni (Chrome, Firefox, Edge, Safari)
-**Licenza:** Proprietario - Solo uso interno MOVARISCH
+**Licenza:** Proprietario - Solo uso interno KEMIVAL

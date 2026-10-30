@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acquista MOVARISCH - Licenza Perpetua €105</title>
+  <title>Acquista KEMIVAL - Licenza Perpetua €105</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header>
     <nav class="container">
-      <a href="index.html" class="logo">MOVARISCH</a>
+      <a href="index.html" class="logo">KEMIVAL</a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="#caratteristiche">Caratteristiche</a></li>
@@ -20,7 +20,7 @@
 
   <section class="container" style="padding: 60px 20px;">
     <div class="text-center mb-4">
-      <h1 style="font-size: 42px; color: var(--accent); margin-bottom: 20px;">Acquista MOVARISCH</h1>
+      <h1 style="font-size: 42px; color: var(--accent); margin-bottom: 20px;">Acquista KEMIVAL</h1>
       <p style="color: var(--text-secondary); font-size: 18px; max-width: 600px; margin: 0 auto;">
         Software professionale per l'analisi del rischio chimico. Licenza perpetua, nessun abbonamento.
       </p>
@@ -34,7 +34,7 @@
         <div style="display: grid; gap: 20px; margin-bottom: 30px;">
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: var(--bg-secondary); border-radius: 12px;">
             <div>
-              <h3 style="color: var(--text-primary); margin-bottom: 10px;">MOVARISCH - Licenza Professionale Perpetua</h3>
+              <h3 style="color: var(--text-primary); margin-bottom: 10px;">KEMIVAL - Licenza Professionale Perpetua</h3>
               <ul style="color: var(--text-secondary); font-size: 14px; list-style: none; padding: 0;">
                 <li>✓ Licenza perpetua (per sempre)</li>
                 <li>✓ 1 PC - Non trasferibile</li>
@@ -45,7 +45,7 @@
             </div>
             <div style="text-align: right;">
               <div style="font-size: 36px; font-weight: 700; color: var(--accent);">€105</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">IVA inclusa (oneri fiscali compresi)</div>
+              <div style="font-size: 14px; color: var(--text-secondary);">Oneri fiscali compresi</div>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
           <h4 style="color: var(--accent); margin-bottom: 10px;">📧 Cosa Riceverai</h4>
           <ul style="color: var(--text-secondary); line-height: 1.8;">
             <li><strong>Chiave di licenza:</strong> MOVA-XXXX-XXXX-XXXX-XXXX via email entro 24h</li>
-            <li><strong>Link download:</strong> Software MOVARISCH ultima versione</li>
+            <li><strong>Link download:</strong> ultima versione del software KEMIVAL</li>
             <li><strong>Fattura elettronica:</strong> Inviata via email</li>
             <li><strong>Istruzioni:</strong> Guida rapida all'attivazione</li>
           </ul>
@@ -156,7 +156,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h4>MOVARISCH</h4>
+          <h4>KEMIVAL</h4>
           <p style="color: var(--text-secondary);">Software professionale per l'analisi automatizzata del rischio chimico.</p>
         </div>
         <div class="footer-section">
@@ -169,7 +169,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 MOVARISCH - Tutti i diritti riservati</p>
+        <p>© 2026 Dott. Giuseppe Strifezza - P. IVA 04107650659</p>
       </div>
     </div>
   </footer>
@@ -178,9 +178,9 @@
   <script src="https://www.paypal.com/sdk/js?client-id=AVVQiFIGzNhHbvi1Zs06KyAiirg-O8MHCeg2KJfdFfWD_XnYwb4cPQi6umML2hoFJYkD87KL5QVVaPeU&currency=EUR&intent=capture"></script>
 
   <script>
-    // Configurazione MOVARISCH
-    const MOVARISCH_PRICE = "105.00";
-    const MOVARISCH_DESCRIPTION = "MOVARISCH - Licenza Professionale Perpetua";
+    // Configurazione KEMIVAL
+    const KEMIVAL_PRICE = "105.00";
+    const KEMIVAL_DESCRIPTION = "KEMIVAL - Licenza Professionale Perpetua";
 
     // Inizializza pulsanti PayPal
     paypal.Buttons({
@@ -197,10 +197,10 @@
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: MOVARISCH_PRICE,
+              value: KEMIVAL_PRICE,
               currency_code: "EUR"
             },
-            description: MOVARISCH_DESCRIPTION
+            description: KEMIVAL_DESCRIPTION
           }]
         });
       },
@@ -216,7 +216,7 @@
             "✅ Pagamento completato con successo!\n\n" +
             "Acquirente: " + details.payer.name.given_name + " " + details.payer.name.surname + "\n" +
             "Email: " + details.payer.email_address + "\n\n" +
-            "Riceverai la chiave di licenza MOVARISCH via email entro 24 ore.\n\n" +
+            "Riceverai la chiave di licenza KEMIVAL via email entro 24 ore.\n\n" +
             "ID Transazione: " + details.id
           );
 
