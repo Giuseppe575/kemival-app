@@ -1,6 +1,6 @@
-# CHANGELOG - MOVARISCH
+# CHANGELOG - KEMIVAL
 
-Registro delle modifiche e miglioramenti al progetto MOVARISCH.
+Registro delle modifiche e miglioramenti al progetto KEMIVAL.
 
 ---
 
@@ -419,7 +419,7 @@ PDF SDS
   ↓
 [Regex] Parsing H-codes, nome, dati
   ↓
-[MOVARISCH.js] Calcolo rischi
+[KEMIVAL.js] Calcolo rischi
   ↓
 [state.rows] Array dati processati
   ↓
@@ -502,11 +502,11 @@ PDF SDS
 
 ### v1.0.0 (iniziale)
 - Parser SDS da PDF
-- Calcolo MOVARISCH per rischio SALUTE
+- Calcolo KEMIVAL per rischio SALUTE
 - Esportazione Excel e Word
 
 ---
 
 **Ultimo aggiornamento**: 25 Novembre 2025
 **Autore**: Giuseppe575 + Claude Code
-**Repository**: https://github.com/Giuseppe575/movarisch
+**Repository**: https://github.com/Giuseppe575/kemival-app

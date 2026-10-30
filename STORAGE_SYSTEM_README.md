@@ -1,4 +1,4 @@
-# 🔧 Sistema di Storage Universale MOVARISCH
+# 🔧 Sistema di Storage Universale KEMIVAL
 
 ## Panoramica
 
@@ -407,4 +407,4 @@ Sì, tutti i metodi funzionano offline. Nessuna connessione richiesta.
 
 **Versione:** 2.0 (Storage Universale)
 **Compatibilità:** Tutti i browser moderni + fallback per restrizioni privacy
-**Licenza:** Proprietario MOVARISCH
+**Licenza:** Proprietario KEMIVAL

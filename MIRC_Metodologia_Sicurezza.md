@@ -449,9 +449,9 @@ Poiché IRC < 0, viene riportato come: **IRC = 0.9** (valore minimo)
 
 ---
 
-## ✅ VERIFICA IMPLEMENTAZIONE MOVARISCH
+## ✅ VERIFICA IMPLEMENTAZIONE KEMIVAL
 
-Per verificare che MOVARISCH implementi correttamente questa metodologia:
+Per verificare che KEMIVAL implementi correttamente questa metodologia:
 
 1. ✅ Formula di calcolo: `IRC = (D + E) / 100`
 2. ✅ Fattori di danno: A1 (proprietà chimico-fisiche) + A2 (proprietà chimiche)

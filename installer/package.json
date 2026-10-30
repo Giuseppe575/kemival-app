@@ -1,16 +1,16 @@
 {
   "name": "movarisch",
-  "version": "1.4.6",
-  "description": "MOVARISCH - Software professionale per l'analisi automatizzata del rischio chimico",
+  "version": "1.5.1",
+  "description": "KEMIVAL - Software professionale per l'analisi automatizzata del rischio chimico secondo il modello MoVaRisCh",
   "main": "main.js",
   "author": {
-    "name": "Giuseppe",
+    "name": "Dott. Giuseppe Strifezza",
     "email": "atis.giuseppe@gmail.com"
   },
-  "homepage": "https://giuseppe575.github.io/movarisch-site/",
+  "homepage": "https://giuseppe575.github.io/kemival/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/giuseppe575/movarisch.git"
+    "url": "https://github.com/Giuseppe575/kemival-app.git"
   },
   "license": "SEE LICENSE IN ../docs/eula.html",
   "scripts": {
@@ -19,6 +19,9 @@
     "verify:config": "node scripts/verify-release.js",
     "build": "npm run verify:config && electron-builder --win --x64 --publish never",
     "build:dir": "npm run verify:config && electron-builder --win --x64 --dir --publish never",
+    "store:assets": "node scripts/generate-store-assets.js",
+    "build:store:test": "npm run store:assets && electron-builder --config electron-builder.store.cjs --win appx --x64 --publish never",
+    "build:store": "npm run store:assets && node scripts/build-store.js",
     "release:build": "node scripts/verify-release.js --release && electron-builder --win --x64 --publish never -c.win.forceCodeSigning=true && node scripts/verify-release.js --release --artifacts --signature",
     "dist": "npm run build"
   },
@@ -34,8 +37,8 @@
   },
   "build": {
     "appId": "com.giuseppe.movarisch",
-    "productName": "MOVARISCH",
-    "copyright": "Copyright © 2025 Giuseppe",
+    "productName": "KEMIVAL",
+    "copyright": "Copyright © 2026 Dott. Giuseppe Strifezza",
     "directories": {
       "output": "dist",
       "buildResources": "build"
@@ -99,12 +102,12 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "MOVARISCH",
+      "shortcutName": "KEMIVAL",
       "installerIcon": "build/icon.ico",
       "uninstallerIcon": "build/icon.ico",
       "installerHeaderIcon": "build/icon.ico",
       "language": "1040",
-      "artifactName": "MOVARISCH-Setup-${version}.exe",
+      "artifactName": "KEMIVAL-Setup-${version}.exe",
       "deleteAppDataOnUninstall": false,
       "perMachine": false,
       "runAfterFinish": true,
@@ -119,7 +122,7 @@
     "publish": {
       "provider": "github",
       "owner": "Giuseppe575",
-      "repo": "movarisch",
+      "repo": "kemival-app",
       "releaseType": "release"
     }
   }

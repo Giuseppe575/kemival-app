@@ -1,4 +1,4 @@
-ICONA MOVARISCH
+ICONA KEMIVAL
 ================
 
 Per completare l'installer, è necessario aggiungere un'icona personalizzata:
@@ -12,7 +12,7 @@ COME CREARE L'ICONA:
 
 Opzione 1 - Online (Più semplice):
 1. Vai su https://convertio.co/it/png-ico/
-2. Carica un PNG del logo MOVARISCH (256x256px)
+2. Carica un PNG del logo KEMIVAL (256x256px)
 3. Converti in .ico
 4. Scarica e rinomina come "icon.ico"
 5. Metti il file in questa cartella (installer/build/)

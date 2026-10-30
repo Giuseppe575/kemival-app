@@ -95,13 +95,13 @@ Quando il build completa con successo, vedrai:
 
 ```
 • packaging       platform=win32 arch=x64 electron=28.3.3
-• building        target=nsis file=dist\MOVARISCH-Setup-1.1.0.exe
-• building block map  blockMapFile=dist\MOVARISCH-Setup-1.1.0.exe.blockmap
+• building        target=nsis file=dist\KEMIVAL-Setup-1.1.0.exe
+• building block map  blockMapFile=dist\KEMIVAL-Setup-1.1.0.exe.blockmap
 ```
 
 L'installer sarà in:
 ```
-C:\Users\atisg\movarisch\installer\dist\MOVARISCH-Setup-1.1.0.exe
+C:\Users\atisg\movarisch\installer\dist\KEMIVAL-Setup-1.1.0.exe
 ```
 
 Dimensione attesa: **~120-150 MB**
@@ -121,4 +121,4 @@ Se nessuna soluzione funziona:
 
 ---
 
-**© 2025 MOVARISCH - Giuseppe**
+**© 2025 KEMIVAL - Giuseppe**

@@ -1,10 +1,10 @@
-# Architettura minima del sistema di licenze MOVARISCH
+# Architettura minima del sistema di licenze KEMIVAL
 
-Questo documento descrive una possibile implementazione "cloud light" per la distribuzione delle licenze del client MOVARISCH, conforme ai requisiti indicati.
+Questo documento descrive una possibile implementazione "cloud light" per la distribuzione delle licenze del client KEMIVAL, conforme ai requisiti indicati.
 
 ## Componenti principali
 
-### Client MOVARISCH
+### Client KEMIVAL
 - Convalida locale della licenza tramite firma digitale (JWT firmato).
 - Effettua un controllo periodico online verso il License Server.
 - Può funzionare offline entro il limite definito da `offline_grace_days`.

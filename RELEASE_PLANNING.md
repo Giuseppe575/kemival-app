@@ -1,4 +1,4 @@
-# MOVARISCH — Piano di Rilascio ai Clienti
+# KEMIVAL — Piano di Rilascio ai Clienti
 **Versione target: v1.2.1**
 **Aggiornato: 14 Aprile 2026**
 
@@ -55,7 +55,7 @@
   npm run build:dir
   ```
 
-- [ ] Verificare che il file `installer/dist/MOVARISCH-Setup-1.2.1.exe` sia stato creato
+- [ ] Verificare che il file `installer/dist/KEMIVAL-Setup-1.2.1.exe` sia stato creato
 
 - [ ] **Verificare il contenuto del pacchetto**: aprire `installer/dist/win-unpacked/` e controllare che esistano:
   - `resources/app/index.html` ✓
@@ -65,7 +65,7 @@
 
 ### FASE 3 — Test pre-rilascio (da fare sull'installer generato)
 
-- [ ] Installare l'app da `MOVARISCH-Setup-1.2.1.exe` in una cartella di test
+- [ ] Installare l'app da `KEMIVAL-Setup-1.2.1.exe` in una cartella di test
 - [ ] Caricare una SDS PDF di prova (es. `SDS ACETATO DI ETILE.pdf` già nel repo)
 - [ ] Premere "Estrai & Calcola"
 - [ ] **Cliccare "Scheda Cumulativa"** → deve aprire la scheda con i dati, NON pagina bianca
@@ -76,10 +76,10 @@
 
 ### FASE 4 — Rilascio su GitHub
 
-- [ ] Andare su: https://github.com/Giuseppe575/movarisch/releases/new
+- [ ] Andare su: https://github.com/Giuseppe575/kemival-app/releases/new
 - [ ] Selezionare il tag `v1.2.1`
-- [ ] Titolo: `MOVARISCH v1.2.1 — Hotfix Scheda Cumulativa e Supporto`
-- [ ] Caricare il file `MOVARISCH-Setup-1.2.1.exe`
+- [ ] Titolo: `KEMIVAL v1.2.1 — Hotfix Scheda Cumulativa e Supporto`
+- [ ] Caricare il file `KEMIVAL-Setup-1.2.1.exe`
 - [ ] Pubblicare la release
 - [ ] Verificare che `electron-updater` rilevi correttamente il nuovo aggiornamento
 

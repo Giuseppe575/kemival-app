@@ -1,4 +1,4 @@
-# 🧪 PIANO DI TEST - CALCOLO SICUREZZA MOVARISCH
+# 🧪 PIANO DI TEST - CALCOLO SICUREZZA KEMIVAL
 **Data**: 24 Novembre 2025
 **Versione**: 1.1.0
 **Obiettivo**: Verificare correttezza calcolo A1, A2, IRC dopo bugfix

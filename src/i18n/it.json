@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "MOVARISCH – SDS Parser (PDF → Tabella → Excel)"
+    "title": "KEMIVAL – SDS Parser (PDF → Tabella → Excel)"
   },
   "header": {
-    "title": "MOVARISCH – Parser SDS da PDF",
-    "subtitle": "Carica le SDS in PDF → estrazione → revisione rapida → calcolo MOVARISCH → esporta Excel, Word o cumulativa"
+    "title": "KEMIVAL – Parser SDS da PDF",
+    "subtitle": "Carica le SDS in PDF → estrazione → revisione rapida → calcolo con il modello MoVaRisCh → esporta Excel, Word o cumulativa"
   },
   "language": {
     "label": "Lingua",
@@ -118,7 +118,7 @@
     }
   },
   "tutorial": {
-    "title": "Come utilizzare il parser MOVARISCH",
+    "title": "Come utilizzare il parser KEMIVAL",
     "steps": [
       "Carica uno o più PDF delle schede di sicurezza (SDS) dal tuo dispositivo.",
       "Premi \"Estrai & Calcola\" per estrarre i dati e ottenere il calcolo preliminare.",
@@ -143,7 +143,7 @@
       "results": "{count} risultato/i trovati",
       "noResults": "Nessun articolo trovato. Prova con termini differenti.",
       "ticketTitle": "Non hai trovato ciò che cercavi?",
-      "ticketDescription": "Apri un ticket sulla piattaforma di supporto e allega direttamente il file PDF o il report MOVARISCH.",
+      "ticketDescription": "Apri un ticket sulla piattaforma di supporto e allega direttamente il file PDF o il report KEMIVAL.",
       "ticketButton": "Crea nuovo ticket"
     }
   },
@@ -154,7 +154,7 @@
         "summary": "Suggerimenti su nomenclatura file, qualità del PDF e gestione dei documenti multipagina."
       },
       "indici": {
-        "title": "Interpretare gli indici MOVARISCH",
+        "title": "Interpretare gli indici MoVaRisCh",
         "summary": "Descrizione di D, Q, U, C, T e I con esempi pratici per laboratorio e produzione."
       },
       "export": {
@@ -237,7 +237,7 @@
     }
   },
   "errors": {
-    "movarischMissing": "Libreria MOVARISCH non caricata: funzioni di calcolo mancanti.",
+    "movarischMissing": "Libreria MoVaRisCh non caricata: funzioni di calcolo mancanti.",
     "loadScript": "Impossibile caricare la risorsa: {src}",
     "loadXlsx": "Impossibile caricare la libreria Excel (SheetJS).",
     "xlsxInvalid": "Libreria SheetJS caricata ma priva delle utilità attese.",
@@ -259,7 +259,7 @@
   "doc": {
     "summary": "SCHEDA RIEPILOGO DELLA VALUTAZIONE SOSTANZA/MISCELA/PREPARATO",
     "exposure": "ESPOSIZIONE PER INALAZIONE E CONTATTO",
-    "method": "Metodologia: MOVARISCH (MOdello di VAlutazione del RISchio CHimico)",
+    "method": "Metodologia: MoVaRisCh (MOdello di VAlutazione del RISchio CHimico)",
     "fields": {
       "file": "File",
       "tradeName": "Nome commerciale / Sostanza",
@@ -304,14 +304,14 @@
     },
     "cmrWarning": {
       "title": "⚠ ATTENZIONE — Sostanza CMR (cat. 1A/1B)",
-      "body": "La sostanza presenta classificazione cancerogena, mutagena o tossica per la riproduzione di categoria 1A o 1B (frasi H rilevate: {codes}). Ai sensi del D.Lgs. 135/2024 (mod. Titolo IX Capo II D.Lgs. 81/08, art. 234), tali sostanze NON rientrano nel calcolo MOVARISCH dell'indice di pericolosità P e DEVONO essere valutate separatamente come agenti cancerogeni/mutageni/tossici per la riproduzione. Applicare gli articoli 235 e seguenti: sostituzione, ciclo chiuso, sorveglianza sanitaria, registro esposti."
+      "body": "La sostanza presenta classificazione cancerogena, mutagena o tossica per la riproduzione di categoria 1A o 1B (frasi H rilevate: {codes}). Ai sensi del D.Lgs. 135/2024 (mod. Titolo IX Capo II D.Lgs. 81/08, art. 234), tali sostanze NON rientrano nel calcolo MoVaRisCh dell'indice di pericolosità P e DEVONO essere valutate separatamente come agenti cancerogeni/mutageni/tossici per la riproduzione. Applicare gli articoli 235 e seguenti: sostituzione, ciclo chiuso, sorveglianza sanitaria, registro esposti."
     },
     "normReference": {
       "title": "Riferimenti normativi",
       "body": "Calcolo eseguito secondo MoVaRisCh 2026 (Regioni Emilia-Romagna, Toscana, Lombardia – agg. 28/02/2026) e D.Lgs. 81/08 art. 222-232, come modificato dal D.Lgs. 135/2024 (recepimento Direttiva UE 2022/431). Classificazione H secondo Regolamento (CE) 1272/2008 (CLP) e 22° ATP (Reg. UE 2024/2564)."
     },
     "indexGuide": {
-      "title": "Guida agli indici MOVARISCH",
+      "title": "Guida agli indici MoVaRisCh",
       "intro": "Significato degli indici utilizzati nel calcolo del rischio per la salute (Titolo IX Capo I D.Lgs. 81/08).",
       "columns": {
         "index": "Indice",
@@ -353,12 +353,12 @@
         },
         "I": {
           "name": "Indice di intensità di esposizione",
-          "meaning": "Intensità dell'esposizione normalizzata, calcolata come I = f(D × Q × U × C) con soglie MOVARISCH. Più alto = esposizione più intensa.",
+          "meaning": "Intensità dell'esposizione normalizzata, calcolata come I = f(D × Q × U × C) con soglie MoVaRisCh. Più alto = esposizione più intensa.",
           "lab": "Tipico: bassa intensità (I ≤ 3) per attività analitiche con buon contenimento.",
           "production": "Tipico: intensità medio-alta (I = 5 – 10) per cicli produttivi non confinati."
         }
       },
-      "formulaTitle": "Formula MOVARISCH applicata",
+      "formulaTitle": "Formula MoVaRisCh applicata",
       "formula": "R_inal = P × E_inal = P × (I × d)\nR_cut = P × E_cut\nR_tot = √(R_inal² + R_cut²)\ndove P = punteggio massimo delle frasi H della sostanza (esclusi CMR cat. 1A/1B)."
     }
   },
@@ -366,7 +366,7 @@
     "productName": "Esempio – Test Parser"
   },
   "footer": {
-    "text": "© MOVARISCH Tool – uso interno consulenza. Tutto offline nel browser. Nessun upload a server."
+    "text": "© KEMIVAL – uso interno consulenza. Tutto offline nel browser. Nessun upload a server."
   },
   "links": {
     "knowledgeBase": "support/knowledge-base.html",

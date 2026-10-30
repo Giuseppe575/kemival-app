@@ -1,4 +1,4 @@
-# Come avviare MOVARISCH in locale
+# Come avviare KEMIVAL in locale
 
 ## Problema: file:/// non funziona
 

@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - Storage Manager Universale
+ * KEMIVAL - Storage Manager Universale
  * Sistema di storage con fallback automatici per massima compatibilità browser
  *
  * Ordine di fallback:

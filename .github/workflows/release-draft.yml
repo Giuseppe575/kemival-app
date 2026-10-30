@@ -44,6 +44,6 @@ jobs:
         run: >-
           gh release create "$env:RELEASE_TAG"
           installer/dist/latest.yml
-          "installer/dist/MOVARISCH-Setup-$($env:RELEASE_TAG.TrimStart('v')).exe"
-          "installer/dist/MOVARISCH-Setup-$($env:RELEASE_TAG.TrimStart('v')).exe.blockmap"
-          --verify-tag --draft --generate-notes --title "MOVARISCH $env:RELEASE_TAG"
+          "installer/dist/KEMIVAL-Setup-$($env:RELEASE_TAG.TrimStart('v')).exe"
+          "installer/dist/KEMIVAL-Setup-$($env:RELEASE_TAG.TrimStart('v')).exe.blockmap"
+          --verify-tag --draft --generate-notes --title "KEMIVAL $env:RELEASE_TAG"

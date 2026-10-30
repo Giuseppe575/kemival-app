@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - UI Attivazione Licenza
+ * KEMIVAL - UI Attivazione Licenza
  * Gestisce l'interfaccia utente per l'attivazione della licenza
  */
 
@@ -38,10 +38,14 @@
       <div id="licenseModal">
         <div class="license-container">
           <div class="license-icon">🔐</div>
-          <h1>Attivazione MOVARISCH</h1>
+          <h1>Attivazione KEMIVAL</h1>
           <p class="subtitle">
-            Inserisci la tua chiave di licenza per attivare MOVARISCH.<br>
+            Inserisci la tua chiave di licenza per attivare KEMIVAL.<br>
             Una volta attivato, potrai utilizzare tutte le funzionalità senza limiti.
+          </p>
+          <p class="subtitle">
+            Licenza perpetua per 1 PC: <strong>€105, comprensivi di oneri fiscali</strong>.<br>
+            Chiave, fattura elettronica e guida di attivazione vengono inviate via email entro 24 ore.
           </p>
 
           <div class="license-input-group">
@@ -104,12 +108,11 @@
       }
     });
 
-    // Link acquisto (personalizzabile)
+    // Link alla pagina ufficiale di acquisto
     const purchaseLink = document.getElementById('purchaseLink');
     purchaseLink.addEventListener('click', (e) => {
       e.preventDefault();
-      // Qui puoi impostare l'URL del tuo sito di vendita
-      window.open('https://tuosito.com/acquista-movarisch', '_blank');
+      window.open('https://giuseppe575.github.io/kemival/acquista.html', '_blank');
     });
   }
 

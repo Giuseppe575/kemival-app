@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 
 /**
- * Script per generare l'icona MOVARISCH
+ * Script per generare l'icona KEMIVAL
  *
  * Crea un'icona 256x256 con:
  * - Sfondo gradiente verde acqua (#4ecca3) -> blu scuro (#0b1220)
  * - Angoli arrotondati
- * - Lettera "M" bianca bold al centro
+ * - Lettera "K" bianca bold al centro
  *
  * Output: icon.png (256x256) e icon.ico (multi-resolution)
  */
 
 const sharp = require('sharp');
-const pngToIco = require('png-to-ico');
+const pngToIcoModule = require('png-to-ico');
+const pngToIco = pngToIcoModule.default || pngToIcoModule;
 const fs = require('fs');
 const path = require('path');
 
@@ -21,9 +22,9 @@ const OUTPUT_DIR = __dirname;
 const PNG_FILE = path.join(OUTPUT_DIR, 'icon.png');
 const ICO_FILE = path.join(OUTPUT_DIR, 'icon.ico');
 
-console.log('🎨 Generazione icona MOVARISCH...\n');
+console.log('🎨 Generazione icona KEMIVAL...\n');
 
-// SVG dell'icona con gradiente e lettera M
+// SVG dell'icona con gradiente e lettera K
 const iconSVG = `
 <svg width="${SIZE}" height="${SIZE}" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -33,7 +34,7 @@ const iconSVG = `
       <stop offset="100%" style="stop-color:#0b1220;stop-opacity:1" />
     </radialGradient>
 
-    <!-- Ombra per la lettera M -->
+    <!-- Ombra per la lettera K -->
     <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
       <feOffset dx="0" dy="2" result="offsetblur"/>
@@ -54,7 +55,7 @@ const iconSVG = `
   <rect width="${SIZE}" height="${SIZE}" rx="32" ry="32" fill="none"
         stroke="#2a8c7a" stroke-width="3" opacity="0.6"/>
 
-  <!-- Lettera M centrale -->
+  <!-- Lettera K centrale -->
   <text x="50%" y="53%"
         font-family="Arial, Helvetica, sans-serif"
         font-size="160"
@@ -62,7 +63,7 @@ const iconSVG = `
         text-anchor="middle"
         dominant-baseline="middle"
         fill="#ffffff"
-        filter="url(#shadow)">M</text>
+        filter="url(#shadow)">K</text>
 
   <!-- Sottile evidenziazione superiore -->
   <ellipse cx="${SIZE/2}" cy="30" rx="60" ry="15" fill="#ffffff" opacity="0.15"/>
@@ -112,7 +113,7 @@ async function generateIcon() {
     console.log(`   ICO: ${(icoStats.size / 1024).toFixed(2)} KB`);
     console.log('   Risoluzioni ICO: 16x16, 32x32, 48x48, 64x64, 128x128, 256x256');
 
-    console.log('\n✨ Icona MOVARISCH generata con successo!');
+    console.log('\n✨ Icona KEMIVAL generata con successo!');
     console.log('\n🎯 File pronti per il build:');
     console.log(`   ${PNG_FILE}`);
     console.log(`   ${ICO_FILE}`);

@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - Preload Script
+ * KEMIVAL - Preload Script
  *
  * Questo script viene eseguito prima del caricamento della pagina web.
  * Fornisce un bridge sicuro tra il processo principale e il renderer.

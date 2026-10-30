@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MOVARISCH - Scheda cumulativa multi-prodotto</title>
+<title>KEMIVAL - Scheda cumulativa multi-prodotto</title>
 <script src="src/lib/docx.umd.js"></script>
 <script src="src/data/hazard-statements-it.js"></script>
 <style>
@@ -188,10 +188,10 @@
       return [`${item.product}\nSDS: ${item.file||'non indicata'}`,item.device,status,`${dpiSummary(item)}\n${reference}`];
     }),[24,16,20,40]);
     const children=[
-      para('MOVARISCH',{bold:true,color:blue,size:18,after:80}),
+      para('KEMIVAL',{bold:true,color:blue,size:18,after:80}),
       para('Scheda cumulativa del rischio chimico',{bold:true,color:navy,size:36,after:80}),
       para('Riepilogo multi-prodotto delle valutazioni confermate',{color:muted,size:22,after:220}),
-      table(['Data di elaborazione','Professionista/i','Versione report'],[[generatedAt.toLocaleString('it-IT'),reviewers.join(', ')||'non indicato',`MOVARISCH ${reportVersion}`]],[33,42,25]),
+      table(['Data di elaborazione','Professionista/i','Versione report'],[[generatedAt.toLocaleString('it-IT'),reviewers.join(', ')||'non indicato',`KEMIVAL ${reportVersion}`]],[33,42,25]),
       heading('1. Quadro generale'),metricTable,
       para(`Massimo complessivo registrato: ${fmt(maxOverall)}. Il dato sintetico non sostituisce la verifica delle condizioni operative e delle misure adottate.`,{color:muted,size:18,before:100,after:120}),
       heading('2. Riepilogo dei prodotti'),productTable,
@@ -206,7 +206,7 @@
       spacer(),para('Firma del professionista: ____________________________________',{color:muted,size:18})
     ];
     const doc=new Document({
-      creator:'MOVARISCH',title:'Scheda cumulativa del rischio chimico',description:'Riepilogo cumulativo multi-prodotto',
+      creator:'KEMIVAL',title:'Scheda cumulativa del rischio chimico',description:'Riepilogo cumulativo multi-prodotto',
       styles:{default:{document:{run:{font:'Aptos',size:20,color:ink},paragraph:{spacing:{after:100,line:276}}}}},
       numbering:{config:[{reference:'priority-list',levels:[{level:0,format:'decimal',text:'%1.',alignment:AlignmentType.START,style:{paragraph:{indent:{left:420,hanging:220}}}}]}]},
       sections:[{properties:{page:{margin:{top:900,right:720,bottom:900,left:720}}},children}]
@@ -218,7 +218,7 @@
     exportButton.disabled=true;exportStatus.textContent='Generazione del documento Word in corso…';
     try{
       const blob=await exportWord();
-      downloadBlob(blob,'MOVARISCH_scheda_cumulativa.docx');
+      downloadBlob(blob,'KEMIVAL_scheda_cumulativa.docx');
       exportStatus.textContent='Documento Word generato correttamente.';
     }catch(error){
       console.error('Errore esportazione Word cumulativa',error);

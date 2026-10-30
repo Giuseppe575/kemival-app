@@ -1,6 +1,6 @@
-# 🚀 MOVARISCH - Guida Build Installer Windows
+# 🚀 KEMIVAL - Guida Build Installer Windows
 
-Questa guida spiega come generare l'installer professionale di **MOVARISCH v1.1.0** per Windows usando Electron ed electron-builder.
+Questa guida spiega come generare l'installer professionale di **KEMIVAL v1.1.0** per Windows usando Electron ed electron-builder.
 
 ---
 
@@ -35,7 +35,7 @@ Questa guida spiega come generare l'installer professionale di **MOVARISCH v1.1.
 
 ```bash
 # Se usi Git
-git clone https://github.com/Giuseppe575/movarisch.git
+git clone https://github.com/Giuseppe575/kemival-app.git
 cd movarisch/installer
 
 # Oppure scarica il ZIP e scompattalo
@@ -62,7 +62,7 @@ L'installer richiede un file icona `icon.ico`. Hai due opzioni:
 
 #### Opzione A: Icona Personalizzata (Consigliato)
 
-1. Crea un'icona 256x256px del logo MOVARISCH
+1. Crea un'icona 256x256px del logo KEMIVAL
 2. Convertila in formato `.ico`:
    - **Online**: https://convertio.co/it/png-ico/
    - **GIMP**: File → Esporta come → icon.ico
@@ -96,13 +96,13 @@ npm run build
 1. ✅ Compila l'app Electron
 2. ✅ Include tutti i file necessari (HTML, CSS, JS, PDF.js, SheetJS)
 3. ✅ Crea il pacchetto NSIS installer
-4. ✅ Genera il file `MOVARISCH-Setup-1.1.0.exe`
+4. ✅ Genera il file `KEMIVAL-Setup-1.1.0.exe`
 
 ⏱️ **Tempo stimato**: 3-10 minuti
 
 **Output**:
 ```
-installer/dist/MOVARISCH-Setup-1.1.0.exe  (~120-150MB)
+installer/dist/KEMIVAL-Setup-1.1.0.exe  (~120-150MB)
 ```
 
 ### Build di Test (Solo Directory)
@@ -128,14 +128,14 @@ npm start
 ```
 
 Questo:
-- ✅ Apre MOVARISCH in una finestra Electron
+- ✅ Apre KEMIVAL in una finestra Electron
 - ✅ Abilita DevTools (F12)
 - ✅ Ricarica automaticamente le modifiche
 
 **Testa**:
 - [x] Caricamento PDF SDS/TDS
 - [x] Estrazione H-codes
-- [x] Calcolo MOVARISCH
+- [x] Calcolo KEMIVAL
 - [x] Esportazione Excel/Word
 - [x] Sistema di licenze
 - [x] Storage manager
@@ -144,7 +144,7 @@ Questo:
 
 Dopo aver generato l'installer:
 
-1. **Trova il file**: `installer/dist/MOVARISCH-Setup-1.1.0.exe`
+1. **Trova il file**: `installer/dist/KEMIVAL-Setup-1.1.0.exe`
 2. **Esegui l'installer** (doppio click)
 3. **Segui il wizard di installazione**:
    - Accetta la licenza (EULA)
@@ -168,7 +168,7 @@ installer/
 │   ├── installer.nsh      # Script NSIS personalizzato (italiano)
 │   └── ICON_README.txt    # Istruzioni per creare l'icona
 ├── dist/                  # Output della build (creato automaticamente)
-│   └── MOVARISCH-Setup-1.1.0.exe
+│   └── KEMIVAL-Setup-1.1.0.exe
 └── README_BUILD.md        # Questa guida
 ```
 
@@ -186,7 +186,7 @@ Edita `package.json`:
 }
 ```
 
-L'installer si chiamerà automaticamente `MOVARISCH-Setup-1.2.0.exe`.
+L'installer si chiamerà automaticamente `KEMIVAL-Setup-1.2.0.exe`.
 
 ### Personalizzare l'Installer NSIS
 
@@ -261,7 +261,7 @@ npm install
 
 ### Storage/Licenze non funzionano in Electron
 
-**Info**: localStorage funziona nativamente in Electron. Il sistema di licenze di MOVARISCH è compatibile.
+**Info**: localStorage funziona nativamente in Electron. Il sistema di licenze di KEMIVAL è compatibile.
 
 **Verifica**:
 ```javascript
@@ -276,7 +276,7 @@ console.log(localStorage.getItem('test')); // Dovrebbe stampare 'ok'
 
 ### Pubblicare l'Installer
 
-Una volta generato `MOVARISCH-Setup-1.1.0.exe`:
+Una volta generato `KEMIVAL-Setup-1.1.0.exe`:
 
 1. **Upload su GitHub Releases**:
    ```bash
@@ -333,7 +333,7 @@ Prima di distribuire l'installer:
 
 ## 📄 Licenza
 
-Questo installer è parte del software MOVARISCH.
+Questo installer è parte del software KEMIVAL.
 Vedi `../docs/eula.html` per i termini di licenza completi.
 
 **© 2025 Giuseppe - Tutti i diritti riservati**

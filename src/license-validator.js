@@ -1,5 +1,5 @@
 /**
- * MOVARISCH - Sistema di validazione licenze offline
+ * KEMIVAL - Sistema di validazione licenze offline
  * Questo modulo gestisce la validazione e l'attivazione delle licenze
  * senza richiedere connessione a server esterni.
  *
