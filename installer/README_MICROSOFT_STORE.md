@@ -1,55 +1,29 @@
-# KEMIVAL - pacchetto Microsoft Store
+# Compilazione Microsoft Store
 
-Questa build e separata dall'installer Windows tradizionale.
+Unico canale previsto: Microsoft Store. Identità esistente in `store-identity.json`; `applicationId` e cartella dati storici sono conservati.
 
-- `npm run build` continua a creare l'installer NSIS in `dist/`.
-- `npm run build:store:test` crea un AppX non firmato con identita di prova in `dist-store/`.
-- `npm run build:store` crea il pacchetto da inviare a Partner Center, usando l'identita ufficiale riservata nello Store.
+## Requisiti
 
-Entrambe le build Store generano automaticamente in `build/appx/` le icone richieste, partendo dal logo KEMIVAL esistente. Queste risorse sono usate soltanto dal pacchetto Store.
+Windows x64, Node 22, Windows 10/11 SDK con UnionMetadata e strumenti AppX, .NET Framework 4.8 e relativi reference assemblies. La versione minima di destinazione è Windows 10 2004 (19041).
 
-La configurazione NSIS esistente rimane nel `package.json`. La configurazione Store e contenuta in `electron-builder.store.cjs` e usa una cartella di output diversa, quindi una build Store non sovrascrive l'installer EXE.
-
-## Prima build locale
-
-Dalla cartella `installer`:
+Dalla radice:
 
 ```powershell
-npm run build:store:test
+npm ci
+npm test
+cd installer
+npm ci
+npm test
+npm run test:runtime
+npm run release:build
 ```
 
-Il pacchetto risultante non e destinato alla pubblicazione e non puo essere installato normalmente finche non viene firmato. Serve per verificare che la conversione AppX/MSIX venga completata.
+Output: `dist-store/KEMIVAL-Store-1.6.0-x64.appx`. La build genera il bridge nativo, le risorse grafiche, il bundle Excel, gli avvisi di licenza e due SBOM. Il gate verifica identità, versione, helper nativo e codice di avvio nel pacchetto.
 
-## Build da inviare allo Store
+Il candidato non è firmato per installazione pubblica diretta: la firma attendibile è applicata dal Microsoft Store dopo la certificazione. Non viene pubblicato un installer EXE né un feed GitHub di aggiornamento. I workflow GitHub caricano soltanto artefatti candidati.
 
-1. Creare l'account da `https://storedeveloper.microsoft.com/`.
-2. Riservare il nome KEMIVAL in Partner Center.
-3. Aprire in Partner Center la pagina dell'identita del prodotto e copiare esattamente:
-   - Package/Identity/Name;
-   - Package/Identity/Publisher;
-   - Publisher display name.
-4. Nella stessa sessione PowerShell impostare i valori e avviare la build:
+## Collaudo e pubblicazione
 
-```powershell
-$env:KEMIVAL_STORE_IDENTITY_NAME = 'valore Package/Identity/Name'
-$env:KEMIVAL_STORE_PUBLISHER = 'valore Package/Identity/Publisher'
-$env:KEMIVAL_STORE_PUBLISHER_DISPLAY_NAME = 'nome editore mostrato nello Store'
-npm run build:store
-```
+Usare una distribuzione privata di Partner Center per verificare il diritto reale del prodotto, gli account, la reinstallazione e l’uso offline. Per provare una nuova acquisizione a pagamento occorre il prezzo corretto nello Store. Il sito pubblico deve essere aggiornato contestualmente alla transizione; le nuove pagine sono mantenute sia in `docs/` sia nel repository separato `kemival`.
 
-Il comando rifiuta di creare il pacchetto di pubblicazione se uno dei tre valori manca. Non inserire questi valori direttamente nel codice: in questo modo la configurazione locale rimane riutilizzabile e non rischia di essere inviata con dati provvisori.
-
-## Aggiornamenti e ritorno all'installer precedente
-
-Nel pacchetto Store, KEMIVAL riconosce `process.windowsStore` e lascia gli aggiornamenti a Microsoft Store. Nell'installer NSIS, `electron-updater` continua a funzionare come prima tramite GitHub Releases.
-
-Per tornare o continuare a usare l'installer tradizionale basta eseguire:
-
-```powershell
-npm run build
-```
-
-I due percorsi restano quindi disponibili in parallelo:
-
-- `dist/KEMIVAL-Setup-<versione>.exe`: installer tradizionale;
-- `dist-store/KEMIVAL-Store-<versione>-x64.appx`: pacchetto Microsoft Store.
+Le vecchie acquisizioni gratuite possono conservare il diritto al prodotto: controllare questo comportamento prima della transizione commerciale. La versione non implementa un componente aggiuntivo a pagamento separato.

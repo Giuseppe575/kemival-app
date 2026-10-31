@@ -1,17 +1,17 @@
-# Politica di sicurezza di KEMIVAL
+# Politica di sicurezza KEMIVAL
 
-## Versioni supportate
+## Distribuzione
 
-Riceve correzioni di sicurezza soltanto l'ultima versione pubblicata. Gli utenti devono installare gli aggiornamenti proposti dall'applicazione o scaricare l'installer dalla pagina ufficiale delle release.
+La versione 1.6.0 è destinata a Microsoft Store. Installazione e aggiornamenti passano dallo Store. I candidati AppX locali o prodotti dalla CI non sono release pubbliche: devono superare il collaudo associato al prodotto e la certificazione Microsoft, che applica la firma della distribuzione Store.
+
+L’aggiornamento va mantenuto attivo nello Store. Il periodo di supporto dichiarato al cliente deve essere coerente con le condizioni del prodotto e gli obblighi applicabili; questa pagina non determina un periodo contrattuale.
 
 ## Segnalazione riservata
 
-Segnalare una vulnerabilità a **atis.giuseppe@gmail.com** indicando versione, sistema operativo, impatto e passaggi minimi per riprodurla. Non aprire un'issue pubblica prima della correzione e non allegare schede di sicurezza, report o dati di clienti reali.
+Segnalare vulnerabilità a **atis.giuseppe@gmail.com**, indicando versione, Windows, impatto e riproduzione minima. Non inserire SDS, report o dati di clienti in issue pubbliche. La ricezione viene normalmente confermata entro 5 giorni lavorativi, come obiettivo operativo. Dopo la verifica vengono comunicati severità e correzione coordinata.
 
-La ricezione viene normalmente confermata entro 5 giorni lavorativi. Dopo la verifica vengono comunicati severità, piano di correzione e modalità di pubblicazione coordinata. Questi tempi sono obiettivi operativi, non garanzie contrattuali.
+## Controlli
 
-## Integrità delle release
+Sandbox e isolamento dei contesti attivi, Node non esposto al renderer, permessi negati per impostazione predefinita, navigazione limitata e IPC verificato per finestra/frame. Il pacchetto disabilita RunAsNode, NODE_OPTIONS e ispezione CLI e abilita l’integrità ASAR. I PDF hanno limiti di dimensione, pagine e tempo e possono essere annullati.
 
-Le release destinate agli utenti devono essere firmate con Authenticode, includere `latest.yml` e superare il controllo automatico di versione, nome dell'artefatto, SHA-512 e firmatario. Le build locali non firmate sono ammesse esclusivamente per sviluppo e test e non devono essere distribuite.
-
-KEMIVAL non raccoglie telemetria d'uso tramite il sistema di aggiornamento. Il log locale dell'updater contiene solo data, stato tecnico e versione; URL e valori assimilabili a credenziali vengono rimossi.
+Le dipendenze applicative e gli strumenti di compilazione hanno inventari separati in `sbom/`. `THIRD_PARTY_NOTICES.txt` contiene le licenze delle librerie applicative. Electron include ulteriori avvisi propri nella distribuzione.

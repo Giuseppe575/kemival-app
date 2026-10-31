@@ -8,10 +8,11 @@
  * - Protocol handlers
  */
 
-const { app, BrowserWindow, Menu, dialog, shell } = require('electron');
+const { app, BrowserWindow, Menu, dialog, shell, ipcMain, session } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { initUpdater, checkForUpdatesManual } = require('./updater');
+const { createStoreLicenseService, STORE_URL } = require('./lib/store-license');
+const { isTrustedMainFrame } = require('./lib/trusted-renderer');
 
 // Dal rebranding KEMIVAL il productName è cambiato: la cartella dati resta quella
 // storica, altrimenti le installazioni esistenti perderebbero licenza e valutazioni.
@@ -20,6 +21,12 @@ app.setPath('userData', path.join(app.getPath('appData'), 'MOVARISCH'));
 // Mantieni un riferimento globale alla finestra per evitare il garbage collection
 let mainWindow;
 const childWindows = new Set();
+const storeLicensing = createStoreLicenseService({
+  isStore: process.windowsStore === true,
+  helperPath: app.isPackaged ? path.join(process.resourcesPath, 'store-bridge', 'Kemival.StoreLicense.exe')
+    : path.join(__dirname, 'store-bridge', 'bin', 'Kemival.StoreLicense.exe'),
+  getWindowHandle: () => mainWindow.getNativeWindowHandle()
+});
 
 // Configurazione percorsi
 const isDev = !app.isPackaged;
@@ -43,6 +50,7 @@ function secureWebPreferences() {
     allowRunningInsecureContent: false,
     navigateOnDragDrop: false,
     safeDialogs: true,
+    additionalArguments: [`--kemival-version=${app.getVersion()}`],
     devTools: isDev
   };
 }
@@ -55,6 +63,7 @@ function openApprovedExternal(url) {
 }
 
 function openInternalPage(relativePath, title) {
+  if (relativePath === 'cumulative-report.html' && !storeLicensing.isLicensed()) return;
   const targetPath = path.join(appPath, relativePath);
   const targetUrl = require('url').pathToFileURL(targetPath).href;
   if (!isAllowedAppFileUrl(targetUrl, appPath)) return;
@@ -213,9 +222,9 @@ function createMenu() {
         },
         { type: 'separator' },
         {
-          label: 'Controlla aggiornamenti...',
+          label: 'Microsoft Store e aggiornamenti',
           click: () => {
-            checkForUpdatesManual(mainWindow);
+            shell.openExternal(STORE_URL);
           }
         },
         { type: 'separator' },
@@ -278,6 +287,7 @@ app.on('web-contents-created', (_event, contents) => {
       return { action: 'deny' };
     }
     if (disposition === 'internal') {
+      if (url.includes('cumulative-report.html') && !storeLicensing.isLicensed()) return { action: 'deny' };
       return {
         action: 'allow',
         overrideBrowserWindowOptions: {
@@ -304,10 +314,18 @@ app.on('web-contents-created', (_event, contents) => {
 
 // Quando Electron ha completato l'inizializzazione
 app.whenReady().then(() => {
+  session.defaultSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
+  session.defaultSession.setPermissionCheckHandler(() => false);
+  const trustedMainFrame = event => isTrustedMainFrame(event, mainWindow, appPath);
+  ipcMain.handle('kemival:store-license', event => {
+    if (!trustedMainFrame(event)) throw new Error('Richiesta non consentita.');
+    return storeLicensing.refresh();
+  });
+  ipcMain.handle('kemival:open-store', event => {
+    if (!trustedMainFrame(event)) throw new Error('Richiesta non consentita.');
+    return shell.openExternal(STORE_URL);
+  });
   createWindow();
-
-  // Inizializza il sistema di aggiornamenti automatici
-  initUpdater(mainWindow);
 
   // Su macOS ricrea la finestra quando l'icona del dock viene cliccata
   app.on('activate', () => {

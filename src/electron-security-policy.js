@@ -7,6 +7,10 @@ const { fileURLToPath } = require('url');
 const ALLOWED_HTTPS_TARGETS = Object.freeze([
   { hostname: 'giuseppe575.github.io', pathPrefixes: ['/movarisch/', '/kemival/'] },
   { hostname: 'github.com', pathPrefixes: ['/Giuseppe575/kemival-app'] },
+  { hostname: 'apps.microsoft.com', pathPrefixes: ['/detail/9PGRQHQ6GQKV'] },
+  { hostname: 'privacy.microsoft.com', pathPrefixes: ['/it-it/privacystatement'] },
+  { hostname: 'www.microsoft.com', pathPrefixes: ['/storedocs/terms-of-sale'] },
+  { hostname: 'docs.github.com', pathPrefixes: ['/site-policy/privacy-policies/github-general-privacy-statement'] },
   { hostname: 'www.garanteprivacy.it', pathPrefixes: ['/'] }
 ]);
 

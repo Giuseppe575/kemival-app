@@ -1,11 +1,10 @@
 'use strict';
 
-// Configurazione separata per Microsoft Store.
-// Importa la configurazione NSIS esistente senza modificarla e sostituisce
-// soltanto target, output e metadati specifici AppX/MSIX.
+// Unico canale di distribuzione: Microsoft Store, identità del prodotto esistente.
 const packageJson = require('./package.json');
 
 const base = packageJson.build;
+const identity = require('./store-identity.json');
 
 module.exports = {
   ...base,
@@ -28,13 +27,13 @@ module.exports = {
   publish: null,
   appx: {
     applicationId: 'MOVARISCH',
-    identityName: process.env.MOVARISCH_STORE_IDENTITY_NAME || 'MOVARISCH.Test',
-    publisher: process.env.MOVARISCH_STORE_PUBLISHER || 'CN=MOVARISCH Test',
-    publisherDisplayName: process.env.MOVARISCH_STORE_PUBLISHER_DISPLAY_NAME || 'KEMIVAL',
+    identityName: process.env.MOVARISCH_STORE_IDENTITY_NAME || identity.identityName,
+    publisher: process.env.MOVARISCH_STORE_PUBLISHER || identity.publisher,
+    publisherDisplayName: process.env.MOVARISCH_STORE_PUBLISHER_DISPLAY_NAME || identity.publisherDisplayName,
     displayName: 'KEMIVAL',
     backgroundColor: '#0b1220',
     languages: ['it-IT', 'en-US'],
-    minVersion: '10.0.17763.0',
+    minVersion: '10.0.19041.0',
     maxVersionTested: '10.0.26100.0',
     artifactName: 'KEMIVAL-Store-${version}-${arch}.${ext}'
   }

@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none';" />
 <title data-i18n="meta.title">KEMIVAL – SDS Parser (PDF → Tabella → Excel)</title>
 <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="src/license-activation.css" />
 <!-- Dipendenze UMD distribuite con l'app: nessun codice viene caricato da CDN. -->
-<script src="src/lib/xlsx.full.min.js"></script>
+<script src="src/lib/excel.bundle.js"></script>
 <script src="src/lib/pdf.bundle.js"></script>
 <script src="src/lib/docx.umd.js"></script>
 </head>
-<body>
-<header>
+<body class="license-locked">
+<header inert>
   <div class="header-main">
     <div>
       <h1 data-i18n="header.title">KEMIVAL – Parser SDS da PDF</h1>
@@ -28,7 +29,7 @@
   </div>
 </header>
 
-<main>
+<main inert>
   <section class="card">
     <div class="row">
       <label class="btn">
@@ -36,6 +37,7 @@
         <span data-i18n="buttons.selectPdf">📄 Seleziona PDF SDS</span>
       </label>
       <button class="btn" id="parseBtn" disabled data-i18n="buttons.parse">🔍 Estrai & Calcola</button>
+      <button type="button" class="btn" id="cancelParseBtn" disabled data-i18n="buttons.cancelImport">Annulla importazione</button>
       <button class="btn" id="clearBtn" data-i18n="buttons.clear">♻️ Svuota</button>
       <button class="btn primary" id="exportBtn" disabled data-i18n="buttons.exportExcel">⬇️ Esporta Excel</button>
       <button class="btn primary" id="exportWordBtn" disabled data-i18n="buttons.exportWord">⬇️ Esporta Word</button>
@@ -178,13 +180,15 @@
   </section>
 </main>
 
-<footer>
+<footer inert>
   <p data-i18n="footer.text">© KEMIVAL – uso interno consulenza. Tutto offline nel browser. Nessun upload a server.</p>
 </footer>
 
+<script src="src/license-activation.js"></script>
 <script src="src/i18n/index.js"></script>
 <script src="src/lib/movarisch.js"></script>
 <script src="src/lib/sds/text-layout.js"></script>
+<script src="src/lib/pdf-document-reader.js"></script>
 <script src="src/lib/sds/section-parser.js"></script>
 <script src="src/lib/sds/hazard-parser.js"></script>
 <script src="src/lib/sds/ingredient-parser.js"></script>
