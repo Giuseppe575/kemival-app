@@ -22,4 +22,4 @@ Il bridge nativo compilato restituisce `not-store` fuori pacchetto. Il diritto r
 
 L’AppX candidato non è una distribuzione pubblica firmata. La certificazione e la firma Microsoft restano necessarie. Il prezzo e le informazioni della scheda Partner Center non sono stati pubblicati da questa modifica. Le vecchie acquisizioni gratuite non costituiscono vendite retroattive.
 
-La revisione dei testi rimuove checkout esterno e clausole incoerenti; restano da definire destinazione B2B/B2C e impegni di supporto/aggiornamenti da dichiarare nel prodotto. La scelta dei servizi e i relativi rapporti privacy richiedono verifica documentale del titolare.
+Il titolare ha approvato acquisto unico a 105 €, vendita sia B2B sia B2C, aggiornamenti di sicurezza per almeno cinque anni dalla pubblicazione della versione 1.6.0 e assistenza tecnica email per due anni dall’acquisto. I testi sono aggiornati su questa base. La revisione rimuove checkout esterno e clausole incoerenti. La scelta dei servizi e i relativi rapporti privacy richiedono verifica documentale del titolare.
