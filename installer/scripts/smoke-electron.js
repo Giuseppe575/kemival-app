@@ -66,6 +66,8 @@ app.whenReady().then(async () => {
   assert.equal(denied, true);
   assert.deepEqual(errors, []);
   console.log(JSON.stringify({ ...state, realPdfWorker: true, untrustedRendererDenied: denied, errors }));
-  child.destroy(); main.destroy(); clearTimeout(deadline); app.quit();
+  child.destroy(); main.destroy(); clearTimeout(deadline); app.exit(0);
 }).catch(error => { console.error(error); clearTimeout(deadline); app.exit(1); });
-app.on('quit', () => { fs.rmSync(profile, { recursive: true, force: true }); });
+app.on('quit', () => {
+  try { fs.rmSync(profile, { recursive: true, force: true }); } catch { /* Windows can retain Chromium profile handles until process exit. */ }
+});
