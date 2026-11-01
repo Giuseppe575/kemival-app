@@ -1,6 +1,6 @@
 # Validazione interna del candidato 1.6.0
 
-Data: 31 ottobre 2026. Questo documento descrive il collaudo del candidato; non è un’attestazione di conformità normativa.
+Aggiornato: 1 novembre 2026. Questo documento descrive il collaudo del candidato; non è un’attestazione di conformità normativa.
 
 ## Esiti locali
 
@@ -16,10 +16,16 @@ Data: 31 ottobre 2026. Questo documento descrive il collaudo del candidato; non 
 
 Electron, pur installato come devDependency per il packaging, è distribuito nel prodotto ed è stato aggiornato separatamente a 43.8.6. L’assenza di advisory npm non dimostra l’assenza di vulnerabilità.
 
-## Collaudo Store ancora necessario
+## Collaudo Microsoft Store
 
-Il bridge nativo compilato restituisce `not-store` fuori pacchetto. Il diritto reale richiede una distribuzione privata associata a `9PGRQHQ6GQKV`, da verificare con account autorizzato e non autorizzato, reinstallazione, cache offline e revoca. Nessun acquisto reale è stato simulato come riuscito.
+Il bridge nativo compilato restituisce `not-store` fuori pacchetto. Il 1 novembre 2026 il candidato è stato inviato nell'anteprima privata `KEMIVAL-1.6.0-Store-license`, associata al prodotto `9PGRQHQ6GQKV` e riservata al titolare. Microsoft ne ha confermato l'elaborazione riuscita; aggiornando dal Microsoft Store sul PC del titolare è stato installato `Ilcodicedidante.MOVARISCH` versione `1.6.0.0`, `SignatureKind: Store`, `Status: Ok`.
 
-L’AppX candidato non è una distribuzione pubblica firmata. La certificazione e la firma Microsoft restano necessarie. Il prezzo e le informazioni della scheda Partner Center non sono stati pubblicati da questa modifica. Le vecchie acquisizioni gratuite non costituiscono vendite retroattive.
+Primo avvio e secondo avvio dopo chiusura completa riusciti: l'interfaccia principale è accessibile, senza finestra di attivazione manuale. La pagina parte da `license-locked`; il relativo blocco viene rimosso soltanto quando il bridge nativo restituisce `state: licensed` e `licensed: true`. È quindi verificato il percorso positivo del diritto Store reale sul dispositivo del titolare, che ha acquisito l'app mentre il prodotto pubblico è ancora gratuito. Non è stato eseguito né simulato un acquisto a pagamento.
+
+I percorsi negativi (assenza del bridge, errori, trial, prodotto errato e risposte incoerenti) sono verificati dai test locali; la build fuori Store resta bloccata nello smoke test Electron reale. Restano da completare sul canale Store la prova con un diverso account privo del diritto, la reinstallazione, la cache offline e la revoca. Questi casi non sono dichiarati superati per effetto della sola certificazione Microsoft.
+
+L'AppX locale resta il candidato da inviare a Microsoft; la copia installata per il collaudo è stata firmata e distribuita dallo Store tramite anteprima privata. La bozza pubblica contiene versione 1.6.0, prezzo italiano 104,99 EUR, presentazioni italiana/inglese e proprietà aggiornate, con pubblicazione manuale. L'aggiornamento pubblico non è stato inviato per la certificazione. Le vecchie acquisizioni gratuite non costituiscono vendite retroattive.
+
+Partner Center indica inoltre per il programma Microsoft Store in Italia profilo fiscale, profilo di pagamento e verifica tutti completati. Il profilo di accredito al titolare usa PayPal: è distinto dal checkout esterno rimosso dal prodotto. Nessun dato fiscale o finanziario è stato modificato.
 
 Il titolare ha approvato acquisto unico a 104,99 € (livello Store approvato il 1/11/2026), vendita sia B2B sia B2C, aggiornamenti di sicurezza per almeno cinque anni dalla pubblicazione della versione 1.6.0 e assistenza tecnica email per due anni dall’acquisto. I testi sono aggiornati su questa base. La revisione rimuove checkout esterno e clausole incoerenti. La scelta dei servizi e i relativi rapporti privacy richiedono verifica documentale del titolare.
