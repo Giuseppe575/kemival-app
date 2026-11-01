@@ -22,7 +22,9 @@ Il bridge nativo compilato restituisce `not-store` fuori pacchetto. Il 1 novembr
 
 Primo avvio e secondo avvio dopo chiusura completa riusciti: l'interfaccia principale è accessibile, senza finestra di attivazione manuale. La pagina parte da `license-locked`; il relativo blocco viene rimosso soltanto quando il bridge nativo restituisce `state: licensed` e `licensed: true`. È quindi verificato il percorso positivo del diritto Store reale sul dispositivo del titolare, che ha acquisito l'app mentre il prodotto pubblico è ancora gratuito. Non è stato eseguito né simulato un acquisto a pagamento.
 
-I percorsi negativi (assenza del bridge, errori, trial, prodotto errato e risposte incoerenti) sono verificati dai test locali; la build fuori Store resta bloccata nello smoke test Electron reale. Restano da completare sul canale Store la prova con un diverso account privo del diritto, la reinstallazione, la cache offline e la revoca. Questi casi non sono dichiarati superati per effetto della sola certificazione Microsoft.
+Il titolare ha inoltre eseguito la prova di chiusura e riapertura senza connessione e riferito che l'app si apre normalmente anche offline; questa prova è riportata come esito comunicato dal titolare, non come osservazione remota dell'agente.
+
+I percorsi negativi (assenza del bridge, errori, trial, prodotto errato e risposte incoerenti) sono verificati dai test locali; la build fuori Store resta bloccata nello smoke test Electron reale. Restano da completare sul canale Store la prova con un diverso account privo del diritto, la reinstallazione e la revoca. Questi casi non sono dichiarati superati per effetto della sola certificazione Microsoft.
 
 L'AppX locale resta il candidato da inviare a Microsoft; la copia installata per il collaudo è stata firmata e distribuita dallo Store tramite anteprima privata. La bozza pubblica contiene versione 1.6.0, prezzo italiano 104,99 EUR, presentazioni italiana/inglese e proprietà aggiornate, con pubblicazione manuale. L'aggiornamento pubblico non è stato inviato per la certificazione. Le vecchie acquisizioni gratuite non costituiscono vendite retroattive.
 
