@@ -1,430 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="KEMIVAL - Software professionale per l'analisi del rischio chimico. Parser automatico SDS/PDF, calcolo M.I.R.C. e MoVaRisCh conforme normativa INRS. Licenza perpetua €105, oneri fiscali compresi.">
-  <meta name="keywords" content="KEMIVAL, modello MoVaRisCh, rischio chimico, SDS, PDF parser, M.I.R.C., sicurezza sul lavoro, analisi rischio">
-  <meta name="author" content="Dott. Giuseppe Strifezza">
-  <title>KEMIVAL - Software Professionale Analisi Rischio Chimico | Licenza €105</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self' data:; script-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Analisi del rischio chimico per Windows · KEMIVAL</title>
+<meta name="description" content="KEMIVAL per Windows: analisi delle SDS, revisione professionale ed esportazione. Acquisto e distribuzione tramite Microsoft Store.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/store.css">
 </head>
 <body>
-
-  <!-- HEADER -->
-  <header>
-    <nav class="container">
-      <a href="index.html" class="logo">KEMIVAL</a>
-      <ul class="nav-links">
-        <li><a href="#caratteristiche">Caratteristiche</a></li>
-        <li><a href="#prezzo">Prezzo</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contatti">Contatti</a></li>
-        <li><a href="acquista.html" class="cta-nav">Acquista Ora</a></li>
-      </ul>
-      <button class="mobile-menu-btn">☰</button>
-    </nav>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Analisi Rischio Chimico<br>Automatizzata e Professionale</h1>
-      <p class="hero-subtitle">
-        Parser intelligente di Schede Dati di Sicurezza (SDS/TDS) con calcolo automatico del rischio
-        chimico secondo il modello pubblico MoVaRisCh (Regioni Emilia-Romagna, Lombardia, Toscana) e la metodologia M.I.R.C. (INRS). Risparmia ore di lavoro, elimina gli errori manuali.
-      </p>
-      <a href="acquista.html" class="hero-cta">
-        🚀 Acquista KEMIVAL
-      </a>
-      <div class="price-tag">
-        Licenza perpetua a <strong>€105</strong> (oneri fiscali compresi)
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEMA/SOLUZIONE -->
-  <section class="container">
-    <div class="problem-solution fade-in-up">
-      <h2>Perché serve KEMIVAL?</h2>
-      <div class="comparison">
-        <div class="problem">
-          <h3>❌ Analisi Manuale delle SDS</h3>
-          <ul>
-            <li>Ore di lavoro per ogni scheda</li>
-            <li>Errori di trascrizione H-codes</li>
-            <li>Calcoli complessi soggetti a errori</li>
-            <li>Difficoltà nell'aggiornamento</li>
-            <li>Reportistica lenta e ripetitiva</li>
-            <li>Nessuna tracciabilità automatica</li>
-          </ul>
-        </div>
-        <div class="solution">
-          <h3>✅ Con KEMIVAL</h3>
-          <ul>
-            <li>Parsing automatico PDF in secondi</li>
-            <li>Estrazione precisa H-codes e EUH</li>
-            <li>Calcoli automatici M.I.R.C. e MoVaRisCh</li>
-            <li>Aggiornamenti istantanei</li>
-            <li>Export Excel e Word con un click</li>
-            <li>Storico completo e organizzato</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CARATTERISTICHE -->
-  <section class="container" id="caratteristiche">
-    <div class="text-center mb-4">
-      <h2 style="font-size: 36px; color: var(--accent);">Caratteristiche Principali</h2>
-      <p style="color: var(--text-secondary); font-size: 18px; max-width: 700px; margin: 20px auto;">
-        Tutto ciò che ti serve per gestire professionalmente il rischio chimico
-      </p>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📄</div>
-        <h3>Parser Automatico SDS/PDF</h3>
-        <p>
-          Carica le Schede Dati di Sicurezza in formato PDF e KEMIVAL estrae automaticamente
-          tutti i dati rilevanti: nome commerciale, stato fisico, H-codes, EUH-codes,
-          punto di infiammabilità e molto altro.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔬</div>
-        <h3>Calcolo M.I.R.C. (INRS)</h3>
-        <p>
-          Calcolo automatico del rischio chimico per la <strong>sicurezza</strong> secondo la
-          metodologia M.I.R.C. dell'INRS francese. Analisi dei rischi fisici (esplosività,
-          infiammabilità, reattività) con classificazione automatica.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏥</div>
-        <h3>Calcolo MoVaRisCh Salute</h3>
-        <p>
-          Valutazione del rischio chimico per la <strong>salute</strong> secondo la metodologia
-          MoVaRisCh. Calcolo di indici D, Q, U, C, T, I con determinazione automatica del giudizio
-          finale (irrilevante, incertezza, superiore, elevato, grave).
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⬇️</div>
-        <h3>Esportazione Excel e Word</h3>
-        <p>
-          Esporta i risultati in formato Excel con tutte le colonne di calcolo, o genera
-          documenti Word professionali per la reportistica aziendale. Formattazione automatica
-          e template personalizzabili.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Scheda Cumulativa</h3>
-        <p>
-          Genera automaticamente la scheda cumulativa di rischio per l'intera azienda,
-          aggregando tutti i prodotti chimici utilizzati. Ideale per il Documento di
-          Valutazione dei Rischi (DVR).
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>100% Offline e Privato</h3>
-        <p>
-          Tutto funziona offline nel browser. <strong>Nessun upload a server esterni</strong>,
-          nessuna connessione internet richiesta. I tuoi dati rimangono sul tuo PC.
-          Massima sicurezza e privacy.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌍</div>
-        <h3>Multilingua (IT/EN)</h3>
-        <p>
-          Interfaccia disponibile in italiano e inglese. Perfetto per aziende internazionali
-          o per lavorare con SDS in lingua inglese. Cambio lingua istantaneo.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h3>Knowledge Base Integrata</h3>
-        <p>
-          Sistema di supporto interno con guide, FAQ e documentazione tecnica. Cerca tra
-          centinaia di articoli di aiuto senza uscire dall'applicazione.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3>Precisione e Conformità</h3>
-        <p>
-          Algoritmi validati e conformi alle normative europee D.Lgs 81/08 e s.m.i.
-          Calcoli certificati secondo le tabelle INRS ufficiali. Affidabilità professionale.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCREENSHOT -->
-  <section class="container mt-4">
-    <div class="text-center mb-4">
-      <h2 style="font-size: 36px; color: var(--accent);">L'applicazione in azione</h2>
-    </div>
-    <div style="background: var(--bg-card); border-radius: 20px; padding: 40px; text-align: center;">
-      <div style="background: var(--bg-secondary); height: 400px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border);">
-        <p style="color: var(--text-secondary); font-size: 18px;">
-          📸 Screenshot dell'applicazione<br>
-          <small>(Da inserire: interfaccia principale, tabella risultati, export)</small>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PREZZO -->
-  <section class="container" id="prezzo">
-    <div class="text-center mb-4">
-      <h2 style="font-size: 36px; color: var(--accent);">Prezzo Semplice e Trasparente</h2>
-    </div>
-
-    <div class="pricing-card">
-      <h3>Licenza Professionale Perpetua</h3>
-      <div class="price">€105</div>
-      <p class="price-period">Oneri fiscali compresi - Pagamento unico</p>
-
-      <ul class="pricing-features">
-        <li>Licenza perpetua (per sempre)</li>
-        <li>1 licenza = 1 PC</li>
-        <li>Tutte le funzionalità incluse</li>
-        <li>Aggiornamenti gratuiti (versione major acquistata)</li>
-        <li>Assistenza tecnica via email</li>
-        <li>Fattura elettronica inclusa</li>
-        <li>Nessun abbonamento mensile</li>
-        <li>Nessun costo nascosto</li>
-      </ul>
-
-      <a href="acquista.html" class="btn btn-primary btn-large btn-block">Acquista Ora</a>
-
-      <p class="mt-3" style="color: var(--text-secondary); font-size: 14px;">
-        Pagamento sicuro con PayPal o carta di credito/debito (gestito da PayPal).<br>
-        Ricevi la chiave di licenza entro 24h.
-      </p>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="container" id="faq">
-    <div class="text-center mb-4">
-      <h2 style="font-size: 36px; color: var(--accent);">Domande Frequenti (FAQ)</h2>
-    </div>
-
-    <div class="faq-item">
-      <h3>Come funziona KEMIVAL?</h3>
-      <p>
-        KEMIVAL è un'applicazione web che funziona completamente offline nel tuo browser.
-        Carichi i PDF delle Schede Dati di Sicurezza (SDS/TDS), il software estrae automaticamente
-        i dati rilevanti (H-codes, EUH, stato fisico, ecc.), calcola i rischi secondo le metodologie
-        M.I.R.C. e MoVaRisCh, e ti permette di esportare i risultati in Excel o Word.
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Quali sono i requisiti tecnici?</h3>
-      <p>
-        <strong>Sistema operativo:</strong> Windows, macOS, Linux (qualsiasi OS con browser moderno)<br>
-        <strong>Browser:</strong> Chrome, Firefox, Edge, Safari (aggiornati all'ultima versione)<br>
-        <strong>Connessione internet:</strong> Solo per il download iniziale. Poi funziona 100% offline.<br>
-        <strong>Spazio disco:</strong> ~50 MB
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>I miei dati sono al sicuro?</h3>
-      <p>
-        Sì, assolutamente. KEMIVAL funziona completamente offline nel tuo browser.
-        <strong>Nessun dato viene mai caricato su server esterni</strong>. I PDF delle SDS e i
-        risultati dei calcoli rimangono esclusivamente sul tuo computer. Massima privacy e sicurezza.
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Come ricevo la licenza dopo l'acquisto?</h3>
-      <p>
-        Dopo il pagamento, riceverai un'email (entro 24 ore) contenente:
-        <br>1. La chiave di licenza nel formato MOVA-XXXX-XXXX-XXXX-XXXX
-        <br>2. Link per il download dell'applicazione
-        <br>3. Fattura elettronica
-        <br>4. Istruzioni per l'attivazione
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>La licenza scade?</h3>
-      <p>
-        No, la licenza è <strong>perpetua</strong> (per sempre). Un pagamento unico di €105
-        e usi KEMIVAL senza limiti di tempo. Non ci sono abbonamenti mensili o costi ricorrenti.
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Posso usare la licenza su più PC?</h3>
-      <p>
-        No, ogni licenza è valida per <strong>1 PC</strong> e non è trasferibile. Se hai bisogno
-        di più licenze per diversi computer o membri del team, contattaci per preventivi aziendali
-        con scontistica dedicata.
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Gli aggiornamenti sono inclusi?</h3>
-      <p>
-        Sì, gli aggiornamenti sono <strong>gratuiti</strong> per la versione major acquistata
-        (es. se acquisti la v1.x, ricevi gratis tutti gli update 1.1, 1.2, ecc.). Eventuali versioni
-        major future (v2.0) potrebbero richiedere un upgrade a prezzo scontato.
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Che tipo di assistenza offrite?</h3>
-      <p>
-        Assistenza tecnica via email (<a href="mailto:atis.giuseppe@gmail.com" style="color: var(--accent);">atis.giuseppe@gmail.com</a>)
-        per problemi tecnici, dubbi sull'utilizzo e richieste di supporto. Tempo di risposta:
-        entro 48 ore lavorative. Include anche knowledge base interna con guide e FAQ.
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Posso avere un rimborso?</h3>
-      <p>
-        Sì, hai diritto di recesso entro <strong>14 giorni</strong> dall'acquisto, a condizione
-        che tu non abbia ancora attivato la licenza. Una volta inserita la chiave di attivazione
-        nel software, decade il diritto di recesso (come da normativa software digitali).
-      </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>KEMIVAL è conforme alle normative italiane?</h3>
-      <p>
-        Sì, KEMIVAL implementa le metodologie pubbliche di valutazione del rischio chimico riconosciute
-        e conformi al <strong>D.Lgs 81/08 e s.m.i.</strong> Le tabelle di calcolo M.I.R.C. sono
-        basate sulle linee guida INRS ufficiali.
-      </p>
-    </div>
-  </section>
-
-  <!-- CONTATTI -->
-  <section class="container" id="contatti">
-    <div class="text-center mb-4">
-      <h2 style="font-size: 36px; color: var(--accent);">Hai Domande?</h2>
-      <p style="color: var(--text-secondary); font-size: 18px; max-width: 600px; margin: 20px auto;">
-        Siamo qui per aiutarti. Contattaci per qualsiasi informazione su KEMIVAL.
-      </p>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 20px; padding: 40px; max-width: 500px; margin: 0 auto; text-align: center;">
-      <div style="margin-bottom: 30px;">
-        <div style="font-size: 48px; margin-bottom: 20px;">✉️</div>
-        <h3 style="color: var(--accent); margin-bottom: 10px;">Email</h3>
-        <a href="mailto:atis.giuseppe@gmail.com" style="color: var(--text-primary); font-size: 18px; text-decoration: none;">
-          atis.giuseppe@gmail.com
-        </a>
-      </div>
-
-      <div style="margin-bottom: 30px;">
-        <div style="font-size: 48px; margin-bottom: 20px;">📍</div>
-        <h3 style="color: var(--accent); margin-bottom: 10px;">Sede</h3>
-        <p style="color: var(--text-secondary);">
-          Caserta, Italia
-        </p>
-      </div>
-
-      <div>
-        <div style="font-size: 48px; margin-bottom: 20px;">⏰</div>
-        <h3 style="color: var(--accent); margin-bottom: 10px;">Assistenza</h3>
-        <p style="color: var(--text-secondary);">
-          Lun-Ven: 9:00 - 18:00<br>
-          Risposta entro 48h lavorative
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINALE -->
-  <section class="container mt-4">
-    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 20px; padding: 60px 40px; text-align: center;">
-      <h2 style="font-size: 36px; color: var(--accent); margin-bottom: 20px;">
-        Pronto a Ottimizzare la Tua Analisi del Rischio Chimico?
-      </h2>
-      <p style="font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px;">
-        Unisciti ai professionisti che hanno già scelto KEMIVAL per semplificare
-        la gestione del rischio chimico in azienda.
-      </p>
-      <a href="acquista.html" class="hero-cta">
-        🚀 Acquista Ora - €105
-      </a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h4>KEMIVAL</h4>
-          <p style="color: var(--text-secondary);">
-            Software professionale per l'analisi automatizzata del rischio chimico
-            secondo metodologie M.I.R.C. e MoVaRisCh.
-          </p>
-        </div>
-
-        <div class="footer-section">
-          <h4>Link Rapidi</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="acquista.html">Acquista</a></li>
-            <li><a href="#caratteristiche">Caratteristiche</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Legale</h4>
-          <ul>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="termini.html">Termini e Condizioni</a></li>
-            <li><a href="eula.html">EULA - Licenza d'Uso</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Contatti</h4>
-          <ul>
-            <li><a href="mailto:atis.giuseppe@gmail.com">atis.giuseppe@gmail.com</a></li>
-            <li>Dott. Giuseppe Strifezza</li>
-            <li>P. IVA 04107650659</li>
-            <li>Caserta, Italia</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2026 KEMIVAL - Tutti i diritti riservati</p>
-        <p style="margin-top: 10px; font-size: 13px;">
-          MoVaRisCh è un modello pubblico di valutazione del rischio chimico elaborato dalle Regioni Emilia-Romagna, Lombardia e Toscana ed è citato a solo scopo descrittivo. KEMIVAL non è affiliato né collegato ai titolari di marchi contenenti tale denominazione.
-        </p>
-        <p style="margin-top: 10px; font-size: 14px;">
-          Sviluppato da Dott. Giuseppe Strifezza | P. IVA 04107650659
-        </p>
-      </div>
-    </div>
-  </footer>
-
+<header>
+<nav class="container">
+<a class="logo" href="index.html">KEMIVAL</a>
+<ul class="nav-links">
+<li>
+<a href="index.html#caratteristiche">Funzioni</a>
+</li>
+<li>
+<a href="index.html#faq">Domande</a>
+</li>
+<li>
+<a class="cta-nav" href="https://apps.microsoft.com/detail/9PGRQHQ6GQKV" rel="noopener">Microsoft Store ↗</a>
+</li>
+</ul>
+</nav>
+</header>
+<main>
+<section class="hero">
+<div class="hero-content">
+<p class="eyebrow">PER WINDOWS · ELABORAZIONE LOCALE</p>
+<h1>Le schede di sicurezza,<br>in una valutazione strutturata.</h1>
+<p class="hero-subtitle">Importa le SDS in PDF, controlla le informazioni estratte e organizza la valutazione del rischio chimico secondo il modello pubblico MoVaRisCh. Esporta i risultati in Excel e Word.</p>
+<a class="hero-cta" href="https://apps.microsoft.com/detail/9PGRQHQ6GQKV" rel="noopener">Scopri KEMIVAL in Microsoft Store ↗</a>
+<p class="store-caption">Acquisto, diritto di utilizzo e aggiornamenti tramite Microsoft Store.</p>
+</div>
+</section>
+<section class="container store-section" id="caratteristiche">
+<p class="eyebrow">UN PERCORSO DI LAVORO COMPLETO</p>
+<h2>Dalla SDS al rapporto professionale</h2>
+<div class="features-grid">
+<article class="feature-card">
+<h3>Importazione PDF</h3>
+<p>Organizza classificazione del prodotto, ingredienti e indicazioni DPI dalle sezioni pertinenti della scheda.</p>
+</article>
+<article class="feature-card">
+<h3>Revisione dei dati</h3>
+<p>Controlla le estrazioni e le condizioni d’uso prima di confermare la valutazione. Il professionista mantiene il controllo del risultato.</p>
+</article>
+<article class="feature-card">
+<h3>Calcolo e riepilogo</h3>
+<p>Applica il percorso MoVaRisCh per il rischio salute e distingue gli agenti che richiedono il percorso specifico CMR.</p>
+</article>
+<article class="feature-card">
+<h3>Excel e Word</h3>
+<p>Esporta le valutazioni e il riepilogo cumulativo in formati modificabili, per proseguire il lavoro professionale.</p>
+</article>
+</div>
+</section>
+<section class="container store-section">
+<div class="store-screen">
+<img src="images/screenshot-interface.png" alt="Interfaccia KEMIVAL con tabella delle valutazioni del rischio chimico" loading="lazy" width="1440" height="900">
+</div>
+<p class="store-caption">Interfaccia di lavoro KEMIVAL. I risultati dipendono dai dati della SDS e dalle condizioni operative inserite.</p>
+</section>
+<section class="container store-section" id="come-funziona">
+<h2>Tre passaggi, un lavoro verificabile</h2>
+<ol class="store-steps">
+<li>
+<strong>Importa.</strong> Seleziona le SDS in formato PDF con testo leggibile.</li>
+<li>
+<strong>Controlla.</strong> Rivedi classificazioni, ingredienti e condizioni di esposizione.</li>
+<li>
+<strong>Esporta.</strong> Conferma la valutazione e genera gli elaborati.</li>
+</ol>
+<p>Il software è uno strumento di supporto alla valutazione professionale. Non sostituisce gli obblighi del datore di lavoro o il giudizio del professionista incaricato.</p>
+</section>
+<section class="container store-section" id="prezzo">
+<div class="store-offer">
+<div>
+<p class="eyebrow">UN SOLO PUNTO DI ACCESSO</p>
+<h2>KEMIVAL in Microsoft Store</h2>
+<p>Acquisto unico dell’app completa. Consulta nello Store il prezzo corrente, i requisiti e le condizioni applicabili prima di confermare l’acquisto. Il diritto di utilizzo è associato al tuo account Microsoft.</p>
+<p>Non servono pagamenti sul sito o chiavi da ricevere via email.</p>
+</div>
+<a class="hero-cta" href="https://apps.microsoft.com/detail/9PGRQHQ6GQKV" rel="noopener">Apri Microsoft Store ↗</a>
+</div>
+</section>
+<section class="container store-section store-faq" id="faq">
+<h2>Domande frequenti</h2>
+<details>
+<summary>Come acquisto e installo KEMIVAL?</summary>
+<p>Apri la scheda Microsoft Store e segui la procedura mostrata da Microsoft. Usa lo stesso account per ritrovare il diritto di utilizzo e reinstallare il prodotto nei limiti delle condizioni applicabili.</p>
+</details>
+<details>
+<summary>Devo inserire una chiave di licenza?</summary>
+<p>No. Nella distribuzione Store il programma verifica il diritto di utilizzo tramite i servizi Windows di Microsoft Store.</p>
+</details>
+<details>
+<summary>I PDF vengono caricati su un server?</summary>
+<p>KEMIVAL elabora i PDF e i dati delle valutazioni localmente. La connessione può essere necessaria per acquisto, installazione, aggiornamenti e verifiche della licenza. L’eventuale invio di allegati all’assistenza avviene soltanto su iniziativa dell’utente.</p>
+</details>
+<details>
+<summary>Quali sono i requisiti?</summary>
+<p>Windows 10 versione 2004 o successiva, architettura x64, e Microsoft Store. I requisiti aggiornati sono indicati nella scheda Store.</p>
+</details>
+<details>
+<summary>Come ricevo assistenza?</summary>
+<p>Scrivi a <a href="mailto:atis.giuseppe@gmail.com">atis.giuseppe@gmail.com</a> per problemi tecnici. Per pagamenti, ricevute e richieste di rimborso usa le procedure del tuo account Microsoft e le condizioni applicabili.</p>
+</details>
+</section>
+</main>
+<footer>
+<div class="container store-footer">
+<div>
+<strong>KEMIVAL</strong>
+<p>Dott. Giuseppe Strifezza · P. IVA 04107650659<br>
+Sede professionale: Via G. D&#x27;Annunzio, 21 — 84092 Bellizzi (SA), Italia<br>
+<a href="mailto:atis.giuseppe@gmail.com">atis.giuseppe@gmail.com</a>
+</p>
+</div>
+<nav aria-label="Informazioni legali">
+<a href="privacy.html">Privacy</a>
+<a href="termini.html">Condizioni</a>
+<a href="eula.html">Licenza d’uso</a>
+</nav>
+<p>© 2026 Giuseppe Strifezza</p>
+</div>
+</footer>
 </body>
 </html>

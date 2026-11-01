@@ -3,12 +3,12 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-test('la configurazione Store resta separata dalla build NSIS', () => {
+test('il solo canale di compilazione e pubblicazione è Microsoft Store', () => {
   const packageJson = require('../package.json');
   const storeConfig = require('../electron-builder.store.cjs');
 
-  assert.equal(packageJson.build.directories.output, 'dist');
-  assert.equal(packageJson.build.win.target[0].target, 'nsis');
+  assert.equal(packageJson.build.directories.output, 'dist-store');
+  assert.equal(packageJson.build.win.target[0].target, 'appx');
   assert.equal(packageJson.build.win.verifyUpdateCodeSignature, true);
 
   assert.equal(storeConfig.directories.output, 'dist-store');

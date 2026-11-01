@@ -18,7 +18,8 @@
     "test": "🧪 Library test",
     "exportExcel": "⬇️ Export Excel",
     "exportWord": "⬇️ Export Word",
-    "cumulative": "📊 Cumulative Report"
+    "cumulative": "📊 Cumulative Report",
+    "cancelImport": "Cancel import"
   },
   "legend": {
     "title": "Risk judgement classes",

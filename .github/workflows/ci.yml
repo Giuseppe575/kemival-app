@@ -1,4 +1,4 @@
-name: CI
+name: CI Microsoft Store
 
 on:
   push:
@@ -10,21 +10,36 @@ permissions:
 jobs:
   test:
     runs-on: windows-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: installer/package-lock.json
-      - name: Test motore applicativo
+          cache-dependency-path: |
+            package-lock.json
+            installer/package-lock.json
+      - name: Install application dependencies
+        run: npm ci
+      - name: Test calculations, reports and exports
         run: npm test
-      - name: Installa dipendenze Electron bloccate
+      - name: Install locked desktop dependencies
         working-directory: installer
         run: npm ci
-      - name: Test e gate configurazione updater
+      - name: Test Store licensing and isolated renderer
         working-directory: installer
-        run: npm test && npm run verify:config
-      - name: Build non pubblicabile
+        run: npm test && npm run test:runtime
+      - name: Build and verify Store candidate
         working-directory: installer
-        run: npm run build:dir
+        run: npm run release:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kemival-store-candidate
+          path: |
+            installer/dist-store/*.appx
+            sbom/*.json
+            THIRD_PARTY_NOTICES.txt
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: error

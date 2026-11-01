@@ -9,7 +9,6 @@
  */
 
 const { contextBridge, ipcRenderer } = require('electron');
-const { version } = require('./package.json');
 
 /**
  * Espone API sicure al renderer process
@@ -17,20 +16,13 @@ const { version } = require('./package.json');
 contextBridge.exposeInMainWorld('electronAPI', {
   // Informazioni sull'app
   platform: process.platform,
-  version,
+  version: process.argv.find(value => value.startsWith('--kemival-version='))?.split('=')[1] || '',
 
   // Flag per indicare che siamo in Electron
   isElectron: true,
 
-  // Listener per eventi di aggiornamento
-  onUpdateStatus: (callback) => {
-    ipcRenderer.on('update-status', (event, data) => callback(data));
-  },
-
-  // Rimuovi listener aggiornamento
-  removeUpdateListener: () => {
-    ipcRenderer.removeAllListeners('update-status');
-  }
+  getStoreLicense: () => ipcRenderer.invoke('kemival:store-license'),
+  openStore: () => ipcRenderer.invoke('kemival:open-store')
 });
 
 /**

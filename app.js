@@ -331,10 +331,10 @@ function showAlert(msg){ const el=$('#alert'); el.textContent=msg; el.style.disp
 function clearAlert(){ const el=$('#alert'); el.textContent=''; el.style.display='none'; }
 
 async function ensureXlsx(){
-  if(!window.XLSX){
+  if(!window.KemivalExcel){
     throw new Error(t('errors.loadXlsx'));
   }
-  return window.XLSX;
+  return window.KemivalExcel;
 }
 
 async function ensureDocx(){
@@ -361,47 +361,26 @@ async function ensurePdfJs(){
 }
 
 // =================== PDF TEXT EXTRACTION ===================
-function readAsArrayBuffer(file){
+function readAsArrayBuffer(file, signal){
   return new Promise((resolve, reject)=>{
     const fr = new FileReader();
-    fr.onload = () => resolve(fr.result);
-    fr.onerror = () => reject(fr.error || new Error(t('errors.readFile')));
+    const abort = () => fr.abort();
+    const cleanup = () => signal?.removeEventListener('abort', abort);
+    if(signal?.aborted){ reject(new Error('Importazione annullata.')); return; }
+    signal?.addEventListener('abort', abort, { once: true });
+    fr.onload = () => { cleanup(); resolve(fr.result); };
+    fr.onabort = () => { cleanup(); reject(new Error('Importazione annullata.')); };
+    fr.onerror = () => { cleanup(); reject(fr.error || new Error(t('errors.readFile'))); };
     fr.readAsArrayBuffer(file);
   });
 }
 
-async function pdfToDocument(file){
+async function pdfToDocument(file, signal){
   const pdfjs = await ensurePdfJs();
-  // Evita fetch su blob:URL (può fallire nel sandbox) passando i bytes direttamente
-  const data = await readAsArrayBuffer(file);
-  let pdf;
-  try{
-    pdf = await pdfjs.getDocument({data}).promise;
-  }catch(err){
-    // Fallback: disabilita worker e riprova
-    try{ pdfjs.disableWorker = true; }catch(e){}
-    pdf = await pdfjs.getDocument({data}).promise;
-  }
-  const rawPages = [];
-  for(let p=1; p<=pdf.numPages; p++){
-    const page = await pdf.getPage(p);
-    const txt = await page.getTextContent();
-    const viewport = page.getViewport({ scale: 1 });
-    rawPages.push({
-      pageNumber: p,
-      width: viewport.width,
-      height: viewport.height,
-      textContent: txt
-    });
-  }
-  if(!window.SdsTextLayout?.layoutPages){
-    throw new Error('Modulo layout SDS non disponibile.');
-  }
-  const pages = window.SdsTextLayout.layoutPages(rawPages);
-  return {
-    pages,
-    text: pages.map(page => page.text).join('\n\f\n')
-  };
+  return window.KemivalPdfReader.read(file, {
+    pdfjs, readFile: readAsArrayBuffer,
+    layoutPages: window.SdsTextLayout.layoutPages, signal
+  });
 }
 
 function formatHazardCode(hazard){
@@ -1783,7 +1762,7 @@ async function exportExcel(){
     }
     if(!reviewsReadyForExport()) return;
     const XLSX = await ensureXlsx();
-    if(!XLSX?.utils){
+    if(!XLSX?.toBlob){
       throw new Error(t('errors.xlsxInvalid'));
     }
     flatRows = state.rows.map(r=>{
@@ -1849,12 +1828,7 @@ async function exportExcel(){
         Rischio_Complessivo:r.OverallRiskValue
       };
     });
-    const ws = XLSX.utils.json_to_sheet(flatRows);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'KEMIVAL');
-    // Fallback robusto via Blob per ambienti con CSP restrittive
-    const wbout = XLSX.write(wb, { bookType:'xlsx', type:'array' });
-    const blob = new Blob([wbout], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const blob = await XLSX.toBlob(flatRows);
     await downloadBlob(blob, 'KEMIVAL_autoestratto.xlsx');
   } catch(err){
     console.error(err);
@@ -1957,6 +1931,7 @@ async function exportWord(){
       }
     };
 
+    const wordValue = (value, options={}) => new TextRun({ ...options, text: value == null || String(value).trim() === '' ? '          ' : String(value), ...(value == null || String(value).trim() === '' ? {highlight:'yellow'} : {}) });
     const sections = state.rows.map((r, index) => {
       const sistemaInfo = getSistemaOption(r.sistema);
       const propInfo = STATO_FISICO_OPTIONS.find(opt=>opt.value===r.statoFisico);
@@ -1969,7 +1944,7 @@ async function exportWord(){
       // Helper: stampa "valore_numerico (descrizione_opzione)" per evitare
       // l'incoerenza fra indice numerico e descrizione testuale nel Word.
       const idx = (numeric, label) => {
-        const n = numeric != null && numeric !== '' ? String(numeric) : '—';
+        const n = numeric != null && numeric !== '' ? String(numeric) : '';
         const l = label || '';
         return l ? `${n}  (${l})` : n;
       };
@@ -1980,7 +1955,7 @@ async function exportWord(){
         [docLabels.fields.tradeName, r.nome || ''],
         [docLabels.fields.physicalState, propInfo?.label ?? r.statoFisico],
         [docLabels.fields.hCodes, (r.hcodes || []).join('; ')],
-        [docLabels.fields.score, String(r.SCORE ?? '')],
+        [docLabels.fields.score, r.isCmr ? '' : String(r.SCORE ?? '')],
         [docLabels.fields.system, sistemaInfo?.label ?? r.sistema],
         [docLabels.fields.control, controlInfo?.label ?? r.controlType],
         [docLabels.fields.controlIndex, idx(controlInfo?.index, controlInfo?.label)],
@@ -1998,9 +1973,9 @@ async function exportWord(){
         [docLabels.fields.distanceValue, String(r.DIS ?? '')],
         [docLabels.fields.eInal, String(r.Einal ?? '')],
         [docLabels.fields.eCut, String(r.Ecut ?? '')],
-        [docLabels.fields.rInal, String(r.Rinal ?? '')],
-        [docLabels.fields.rCut, String(r.Rcut ?? '')],
-        [docLabels.fields.rTot, String(r.Rtot ?? '')],
+        [docLabels.fields.rInal, r.isCmr ? '' : String(r.Rinal ?? '')],
+        [docLabels.fields.rCut, r.isCmr ? '' : String(r.Rcut ?? '')],
+        [docLabels.fields.rTot, r.isCmr ? '' : String(r.Rtot ?? '')],
         // M.I.R.C. (INRS) SAFETY FIELDS
         [docLabels.fields.hCodesPhysical, (r.hcodesPhysical || []).join('; ')],
         [docLabels.fields.quantitySafety, String(r.quantitySafety ?? '')],
@@ -2024,15 +1999,15 @@ async function exportWord(){
             new TableCell({
               children: [new Paragraph({
                 children: [new TextRun({ text: campo, bold: true })],
-                alignment: AlignmentType.LEFT
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 45, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER
             }),
             new TableCell({
               children: [new Paragraph({
-                children: [new TextRun({ text: valore })],
-                alignment: AlignmentType.LEFT
+                children: [wordValue(valore)],
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 55, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER
@@ -2051,15 +2026,15 @@ async function exportWord(){
             new TableCell({
               children: [new Paragraph({
                 children: [new TextRun({ text: 'Giudizio SALUTE', bold: true })],
-                alignment: AlignmentType.LEFT
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 45, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER
             }),
             new TableCell({
               children: [new Paragraph({
-                children: [new TextRun({ text: r.Giudizio || '', bold: true, color: '000000' })],
-                alignment: AlignmentType.LEFT
+                children: [wordValue(r.Giudizio, {bold:true,color:'000000'})],
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 55, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER,
@@ -2075,22 +2050,22 @@ async function exportWord(){
 
       // GIUDIZIO SICUREZZA (M.I.R.C.)
       const safetyRiskColor = getRiskColor(r.mircClass || 'irr');
-      const safetyLevelText = r.mircText || 'RISCHIO IRRILEVANTE';
+      const safetyLevelText = r.mircText || '';
       tableRows.push(
         new TableRow({
           children: [
             new TableCell({
               children: [new Paragraph({
                 children: [new TextRun({ text: 'Giudizio SICUREZZA (M.I.R.C.)', bold: true })],
-                alignment: AlignmentType.LEFT
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 45, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER
             }),
             new TableCell({
               children: [new Paragraph({
-                children: [new TextRun({ text: safetyLevelText, bold: true, color: '000000' })],
-                alignment: AlignmentType.LEFT
+                children: [wordValue(safetyLevelText, {bold:true,color:'000000'})],
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 55, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER,
@@ -2106,22 +2081,22 @@ async function exportWord(){
 
       // RISCHIO COMPLESSIVO (max tra salute e sicurezza)
       const overallRiskColor = getRiskColor(r.OverallClass || r.GiudizioClass);
-      const overallText = `RISCHIO COMPLESSIVO: ${r.OverallRiskValue ? r.OverallRiskValue.toFixed(2) : '-'}`;
+      const overallText = r.isCmr ? 'CMR 1A/1B — Titolo IX, Capo II' : Number.isFinite(r.OverallRiskValue) ? `RISCHIO COMPLESSIVO: ${r.OverallRiskValue.toFixed(2)}` : '';
       tableRows.push(
         new TableRow({
           children: [
             new TableCell({
               children: [new Paragraph({
                 children: [new TextRun({ text: 'Giudizio FINALE (Complessivo)', bold: true, size: 24 })],
-                alignment: AlignmentType.LEFT
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 45, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER
             }),
             new TableCell({
               children: [new Paragraph({
-                children: [new TextRun({ text: overallText, bold: true, color: 'FFFFFF', size: 28 })],
-                alignment: AlignmentType.CENTER
+                children: [wordValue(overallText, {bold:true,color:'000000'})],
+                alignment: AlignmentType.JUSTIFIED
               })],
               width: { size: 55, type: WidthType.PERCENTAGE },
               verticalAlign: VerticalAlign.CENTER,
@@ -2147,9 +2122,9 @@ async function exportWord(){
           children: [new TextRun({
             text: docLabels.summary,
             bold: true,
-            size: 28
+            size: 24
           })],
-          alignment: AlignmentType.CENTER,
+          alignment: AlignmentType.JUSTIFIED,
           spacing: { after: 200 }
         }),
         new Paragraph({
@@ -2158,15 +2133,15 @@ async function exportWord(){
             bold: true,
             size: 24
           })],
-          alignment: AlignmentType.CENTER,
+          alignment: AlignmentType.JUSTIFIED,
           spacing: { after: 100 }
         }),
         new Paragraph({
           children: [new TextRun({
             text: docLabels.method,
-            size: 20
+            size: 24
           })],
-          alignment: AlignmentType.CENTER,
+          alignment: AlignmentType.JUSTIFIED,
           spacing: { after: 400 }
         })
       ];
@@ -2180,13 +2155,13 @@ async function exportWord(){
         children.push(
           new Paragraph({
             children: [new TextRun({ text: cmrWarningTitle, bold: true, color: 'FFFFFF', size: 24 })],
-            alignment: AlignmentType.CENTER,
+            alignment: AlignmentType.JUSTIFIED,
             spacing: { before: 100, after: 100 },
             shading: { type: ShadingType.SOLID, color: '8B0000', fill: '8B0000' }
           }),
           new Paragraph({
-            children: [new TextRun({ text: cmrWarningBody, size: 20 })],
-            alignment: AlignmentType.LEFT,
+            children: [new TextRun({ text: cmrWarningBody, size: 24 })],
+            alignment: AlignmentType.JUSTIFIED,
             spacing: { after: 300 }
           })
         );
@@ -2258,40 +2233,41 @@ async function exportWord(){
     const appendix = [
       new Paragraph({ pageBreakBefore: true }),
       new Paragraph({
-        children: [new TextRun({ text: t('doc.indexGuide.title'), bold: true, size: 28 })],
-        alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: t('doc.indexGuide.title'), bold: true, size: 24 })],
+        alignment: AlignmentType.JUSTIFIED,
         spacing: { after: 200 }
       }),
       new Paragraph({
-        children: [new TextRun({ text: t('doc.indexGuide.intro'), size: 20 })],
-        alignment: AlignmentType.LEFT,
+        children: [new TextRun({ text: t('doc.indexGuide.intro'), size: 24 })],
+        alignment: AlignmentType.JUSTIFIED,
         spacing: { after: 200 }
       }),
       guideTable,
       new Paragraph({
-        children: [new TextRun({ text: t('doc.indexGuide.formulaTitle'), bold: true, size: 22 })],
-        alignment: AlignmentType.LEFT,
+        children: [new TextRun({ text: t('doc.indexGuide.formulaTitle'), bold: true, size: 24 })],
+        alignment: AlignmentType.JUSTIFIED,
         spacing: { before: 300, after: 100 }
       }),
       new Paragraph({
-        children: [new TextRun({ text: t('doc.indexGuide.formula'), font: 'Consolas', size: 20 })],
-        alignment: AlignmentType.LEFT,
+        children: [new TextRun({ text: t('doc.indexGuide.formula'), font: 'Times New Roman', size: 24 })],
+        alignment: AlignmentType.JUSTIFIED,
         spacing: { after: 400 }
       }),
       new Paragraph({
-        children: [new TextRun({ text: t('doc.normReference.title'), bold: true, size: 22 })],
-        alignment: AlignmentType.LEFT,
+        children: [new TextRun({ text: t('doc.normReference.title'), bold: true, size: 24 })],
+        alignment: AlignmentType.JUSTIFIED,
         spacing: { after: 100 }
       }),
       new Paragraph({
-        children: [new TextRun({ text: t('doc.normReference.body'), size: 18, italics: true })],
-        alignment: AlignmentType.LEFT,
+        children: [new TextRun({ text: t('doc.normReference.body'), size: 24, italics: true })],
+        alignment: AlignmentType.JUSTIFIED,
         spacing: { after: 200 }
       })
     ];
 
     // Crea il documento con tutte le sezioni + appendice normativa
     const doc = new Document({
+      styles:{default:{document:{run:{font:'Times New Roman',size:24},paragraph:{alignment:AlignmentType.JUSTIFIED,spacing:{line:360}}}}},
       sections: [{
         properties: {},
         children: [...sections.flat(), ...appendix]
@@ -2316,19 +2292,27 @@ const exportWordBtn = document.querySelector('#exportWordBtn');
 const clearBtn = document.querySelector('#clearBtn');
 const testBtn = document.querySelector('#testBtn');
 
+let parseAbortController = null;
+const cancelParseBtn = document.getElementById('cancelParseBtn');
+cancelParseBtn?.addEventListener('click', () => parseAbortController?.abort());
 pdfInput.addEventListener('change', (e)=>{
   state.files = Array.from(e.target.files||[]);
   parseBtn.disabled = state.files.length===0;
 });
 
 parseBtn.addEventListener('click', async ()=>{
-  if(!state.files.length) return;
+  if(!state.files.length || parseAbortController) return;
+  if(state.files.length > 20 || state.files.reduce((total,file)=>total+file.size,0) > 100*1024*1024){
+    showAlert('Seleziona al massimo 20 PDF, per un totale non superiore a 100 MB.'); return;
+  }
+  parseAbortController = new AbortController();
+  if(cancelParseBtn) cancelParseBtn.disabled = false;
   clearAlert();
   state.rows = [];
   const extractionMessages = [];
   try{
     for(const file of state.files){
-      const document = await pdfToDocument(file);
+      const document = await pdfToDocument(file, parseAbortController.signal);
       const text = document.text;
       const sdsAnalysis = analyzeSdsDocument(document);
       let productCodes = sdsAnalysis.productHazards.map(formatHazardCode);
@@ -2452,6 +2436,10 @@ parseBtn.addEventListener('click', async ()=>{
     }
   }catch(err){
     showAlert(t('errors.pdfParse', { error: describeError(err) }));
+  }
+  finally {
+    parseAbortController = null;
+    if(cancelParseBtn) cancelParseBtn.disabled = true;
   }
 });
 

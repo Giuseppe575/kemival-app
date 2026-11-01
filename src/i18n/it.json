@@ -18,7 +18,8 @@
     "test": "🧪 Test libreria",
     "exportExcel": "⬇️ Esporta Excel",
     "exportWord": "⬇️ Esporta Word",
-    "cumulative": "📊 Scheda Cumulativa"
+    "cumulative": "📊 Scheda Cumulativa",
+    "cancelImport": "Annulla importazione"
   },
   "legend": {
     "title": "Classificazione del giudizio",

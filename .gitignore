@@ -57,3 +57,8 @@ license-generator.html
 # Strumenti locali
 .playwright-mcp/
 output/
+
+# Separate landing repository and generated Store bridge
+site/
+site-dante/
+installer/store-bridge/bin/

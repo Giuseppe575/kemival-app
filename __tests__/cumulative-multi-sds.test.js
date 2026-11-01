@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const source = fs.readFileSync(path.join(__dirname, '..', 'cumulative-report.html'), 'utf8');
+const source = ['cumulative-report.html','src/cumulative-report.js'].map(file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8')).join('\n');
 
 test('la scheda cumulativa elabora tutte le SDS e non soltanto la prima riga', () => {
   assert.match(source, /const rows=data\.rows/);
@@ -16,7 +16,7 @@ test('i DPI cumulativi provengono dalla sezione 8 e distinguono gli esiti', () =
   assert.match(source, /required:\['Prescritto nella SDS'/);
   assert.match(source, /recommended:\['Consigliato nella SDS'/);
   assert.match(source, /conditional:\['Richiesto alle condizioni indicate'/);
-  assert.match(source, /carattere obbligatorio del DPI deve essere confermato dal professionista/);
+  assert.match(source, /Il prospetto riporta le indicazioni sui dispositivi di protezione individuale contenute nella Sezione 8/);
   assert.doesNotMatch(source, /sourceText\.slice\(0,360\)/);
 });
 

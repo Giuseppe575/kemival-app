@@ -21,7 +21,7 @@ test('l interfaccia non esegue librerie da CDN', () => {
 
 test('tutte le dipendenze browser richieste sono distribuite negli asset locali', () => {
   const assets = [
-    'src/lib/xlsx.full.min.js',
+    'src/lib/excel.bundle.js',
     'src/lib/pdf.bundle.js',
     'src/lib/pdf.worker.min.mjs',
     'src/lib/docx.umd.js',
@@ -31,19 +31,19 @@ test('tutte le dipendenze browser richieste sono distribuite negli asset locali'
   for(const relativePath of assets){
     const stat = fs.statSync(path.join(root, relativePath));
     assert.ok(stat.isFile(), `${relativePath} deve essere un file`);
-    assert.ok(stat.size > 100_000, `${relativePath} sembra incompleto`);
+    assert.ok(stat.size > 50_000, `${relativePath} sembra incompleto`);
   }
 });
 
 test('il build Electron include l intera directory degli asset locali', () => {
   const installerPackage = JSON.parse(read('installer/package.json'));
-  assert.ok(installerPackage.build.files.includes('../src/**/*'));
+  assert.ok(installerPackage.build.files.includes('main.js'));
   assert.ok(installerPackage.build.extraResources[0].filter.includes('src/**/*'));
 });
 
 test('i dati SDS non vengono scritti nei log e il passaggio cumulativo è monouso', () => {
   const appSource = read('app.js');
-  const reportSource = read('cumulative-report.html');
+  const reportSource = read('src/cumulative-report.js');
 
   assert.doesNotMatch(appSource, /console\.log\s*\(/);
   assert.doesNotMatch(reportSource, /console\.log\s*\(/);

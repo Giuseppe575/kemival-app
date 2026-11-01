@@ -1,87 +1,78 @@
 'use strict';
-
 const assert = require('node:assert/strict');
-const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
-const { spawnSync } = require('node:child_process');
-
-const installerRoot = path.resolve(__dirname, '..');
-const repositoryRoot = path.resolve(installerRoot, '..');
-const args = new Set(process.argv.slice(2));
-const releaseMode = args.has('--release');
-const verifyArtifacts = args.has('--artifacts');
-const verifySignature = args.has('--signature');
-
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
+const root = path.resolve(__dirname, '../..');
+const installer = path.join(root, 'installer');
+const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
+const app = read(path.join(root, 'package.json'));
+const pkg = read(path.join(installer, 'package.json'));
+const identity = read(path.join(installer, 'store-identity.json'));
+const config = require('../electron-builder.store.cjs');
+for (const directory of [root, installer]) {
+  const lock = read(path.join(directory, 'package-lock.json'));
+  assert.equal(lock.version, pkg.version);
+  assert.equal(lock.packages[''].version, pkg.version);
 }
-
-function fail(message) {
-  throw new Error(`Release gate: ${message}`);
-}
-
-function parseLatestYml(text) {
-  const read = (key) => text.match(new RegExp(`^${key}:\\s*['\"]?([^'\"\\r\\n]+)`, 'm'))?.[1].trim();
-  return { version: read('version'), path: read('path'), sha512: read('sha512') };
-}
-
-function sha512Base64(file) {
-  const hash = crypto.createHash('sha512');
-  hash.update(fs.readFileSync(file));
-  return hash.digest('base64');
-}
-
-function assertValidAuthenticode(file) {
-  if (process.platform !== 'win32') fail('la verifica Authenticode deve essere eseguita su Windows');
-  const escaped = file.replace(/'/g, "''");
-  const command = `$s=Get-AuthenticodeSignature -LiteralPath '${escaped}'; ` +
-    `$o=[pscustomobject]@{Status=[string]$s.Status;Subject=[string]$s.SignerCertificate.Subject}; ` +
-    `$o | ConvertTo-Json -Compress`;
-  const result = spawnSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', command], {
-    encoding: 'utf8',
-    windowsHide: true
+assert.equal(app.version, pkg.version);
+assert.match(pkg.version, /^\d+\.\d+\.\d+$/);
+assert.equal(pkg.build.publish, null);
+assert.equal(config.publish, null);
+assert.equal(config.win.target[0].target, 'appx');
+assert.equal(config.appx.identityName, identity.identityName);
+assert.equal(config.appx.publisher, identity.publisher);
+assert.equal(identity.storeId, '9PGRQHQ6GQKV');
+assert.equal(pkg.build.electronFuses.runAsNode, false);
+assert.equal(pkg.build.electronFuses.enableNodeOptionsEnvironmentVariable, false);
+assert.equal(pkg.build.electronFuses.enableNodeCliInspectArguments, false);
+assert.equal(pkg.build.electronFuses.onlyLoadAppFromAsar, true);
+assert.equal(pkg.dependencies?.['electron-updater'], undefined);
+assert.equal(app.dependencies.xlsx, undefined);
+assert.equal(pkg.devDependencies.electron, '43.8.6');
+if (process.argv.includes('--artifacts')) {
+  const file = path.join(installer, 'dist-store', `KEMIVAL-Store-${pkg.version}-x64.appx`);
+  const { unzipSync } = require(path.join(root, 'node_modules/fflate'));
+  const sourceFiles = ['index.html', 'app.js', 'src/license-activation.js', 'src/cumulative-report.js',
+    'src/lib/excel.bundle.js', 'src/lib/pdf-document-reader.js', 'src/electron-security-policy.js',
+    'docs/privacy.html', 'docs/eula.html', 'docs/termini.html', 'docs/css/store.css', 'src/cumulative-report.css', 'src/license-activation.css', 'THIRD_PARTY_NOTICES.txt'];
+  const selected = unzipSync(fs.readFileSync(file), { filter: entry =>
+    entry.name === 'AppxManifest.xml' || entry.name.endsWith('resources/app.asar') ||
+    entry.name.endsWith('resources/store-bridge/Kemival.StoreLicense.exe') ||
+    sourceFiles.some(source => entry.name.endsWith(`resources/app/${source}`))
   });
-  if (result.status !== 0) fail(`impossibile verificare Authenticode: ${result.stderr.trim()}`);
-  const signature = JSON.parse(result.stdout.trim());
-  if (signature.Status !== 'Valid') fail(`firma Authenticode non valida (${signature.Status})`);
-  const expectedSubject = process.env.WINDOWS_SIGNING_SUBJECT;
-  if (!expectedSubject) fail('WINDOWS_SIGNING_SUBJECT non configurato');
-  if (!signature.Subject.toLowerCase().includes(expectedSubject.toLowerCase())) {
-    fail('il firmatario non corrisponde a WINDOWS_SIGNING_SUBJECT');
+  const manifest = Buffer.from(selected['AppxManifest.xml'] || []).toString();
+  assert.ok(manifest.includes(identity.identityName));
+  assert.ok(manifest.includes(identity.publisher));
+  assert.ok(manifest.includes(`Version="${pkg.version}.0"`));
+  assert.ok(Object.keys(selected).some(name => name.endsWith('resources/store-bridge/Kemival.StoreLicense.exe')));
+  assert.ok(Object.keys(selected).some(name => name.endsWith('resources/app.asar')));
+  const html = Object.entries(selected).find(([name]) => name.endsWith('resources/app/index.html'));
+  assert.ok(html);
+  assert.match(Buffer.from(html[1]).toString(), /src\/license-activation\.js/);
+  for (const source of sourceFiles) {
+    const packed = Object.entries(selected).find(([name]) => name.endsWith(`resources/app/${source}`));
+    assert.ok(packed, `File assente: ${source}`);
+    assert.ok(Buffer.from(packed[1]).equals(fs.readFileSync(path.join(root, source))), `File non aggiornato nel pacchetto: ${source}`);
   }
-}
-
-const packageJson = readJson(path.join(installerRoot, 'package.json'));
-const lockJson = readJson(path.join(installerRoot, 'package-lock.json'));
-const rootPackage = readJson(path.join(repositoryRoot, 'package.json'));
-
-assert.match(packageJson.version, /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/, 'versione non semver');
-assert.equal(rootPackage.version, packageJson.version, 'versione root e installer non coerente');
-assert.equal(lockJson.version, packageJson.version, 'versione package-lock non coerente');
-assert.equal(lockJson.packages?.['']?.version, packageJson.version, 'versione root package-lock non coerente');
-assert.equal(packageJson.build?.win?.verifyUpdateCodeSignature, true, 'verifica firma updater disattivata');
-assert.notEqual(packageJson.build?.win?.sign, null, 'firma Windows disattivata esplicitamente');
-
-if (releaseMode) {
-  const tag = process.env.RELEASE_TAG || (process.env.GITHUB_REF_TYPE === 'tag' ? process.env.GITHUB_REF_NAME : '');
-  if (tag !== `v${packageJson.version}`) fail(`tag atteso v${packageJson.version}, ricevuto ${tag || '(assente)'}`);
-  if (!process.env.CSC_LINK || !process.env.CSC_KEY_PASSWORD) {
-    fail('credenziali di firma CSC_LINK/CSC_KEY_PASSWORD assenti');
+  const asarPath = path.join(installer, 'dist-store/win-unpacked/resources/app.asar');
+  const asar = require('@electron/asar');
+  for (const source of ['main.js', 'preload.js', 'lib/store-license.js', 'lib/trusted-renderer.js']) {
+    assert.ok(asar.extractFile(asarPath, source).equals(fs.readFileSync(path.join(installer, source))), `Codice desktop non aggiornato: ${source}`);
   }
+  const packedAsar = Object.entries(selected).find(([name]) => name.endsWith('resources/app.asar'));
+  assert.ok(Buffer.from(packedAsar[1]).equals(fs.readFileSync(asarPath)));
+  const packedHelper = Object.entries(selected).find(([name]) => name.endsWith('resources/store-bridge/Kemival.StoreLicense.exe'));
+  assert.ok(Buffer.from(packedHelper[1]).equals(fs.readFileSync(path.join(installer, 'store-bridge/bin/Kemival.StoreLicense.exe'))));
+  import('@electron/fuses').then(async ({getCurrentFuseWire, FuseV1Options, FuseState}) => {
+    const wire = await getCurrentFuseWire(path.join(installer, 'dist-store/win-unpacked/KEMIVAL.exe'));
+    for (const option of ['RunAsNode', 'EnableNodeOptionsEnvironmentVariable', 'EnableNodeCliInspectArguments']) {
+      assert.equal(wire[FuseV1Options[option]], FuseState.DISABLE, `Fuse ${option}`);
+    }
+    for (const option of ['OnlyLoadAppFromAsar', 'EnableEmbeddedAsarIntegrityValidation']) {
+      assert.equal(wire[FuseV1Options[option]], FuseState.ENABLE, `Fuse ${option}`);
+    }
+    console.log('Fuse del runtime verificati.');
+  }).catch(error => { console.error(error); process.exitCode = 1; });
+  console.log(`Artefatto verificato: ${file}`);
 }
-
-if (verifyArtifacts) {
-  const latestPath = path.join(installerRoot, 'dist', 'latest.yml');
-  if (!fs.existsSync(latestPath)) fail('dist/latest.yml assente');
-  const metadata = parseLatestYml(fs.readFileSync(latestPath, 'utf8'));
-  const expectedName = `KEMIVAL-Setup-${packageJson.version}.exe`;
-  if (metadata.version !== packageJson.version) fail('versione latest.yml incoerente');
-  if (metadata.path !== expectedName) fail(`path latest.yml inatteso: ${metadata.path}`);
-  const installerPath = path.join(installerRoot, 'dist', expectedName);
-  if (!fs.existsSync(installerPath)) fail(`artefatto ${expectedName} assente`);
-  if (sha512Base64(installerPath) !== metadata.sha512) fail('SHA-512 installer diverso da latest.yml');
-  if (verifySignature) assertValidAuthenticode(installerPath);
-}
-
-console.log(`Release gate superato per KEMIVAL ${packageJson.version}.`);
+console.log(`Gate Microsoft Store superato per KEMIVAL ${pkg.version}.`);
